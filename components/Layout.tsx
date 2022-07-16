@@ -1,16 +1,19 @@
+import Header from "./Header";
 import Head from "next/head";
-import React from "react";
 
-const Layout = ({ children }: { children: any }) => {
+const Layout = ({ children}: {children: any}) => {
   return (
     <>
       <Head>
         <title>tweetmike</title>
-        <meta>name="description" content="tweetmike"</meta>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
-        <main className="flex-grow">{children}</main>
+      <div className="min-h-screen mx-auto max-w-2xl flex flex-col">
+        <Header />
+        <main className="flex-grow container mx-auto px-4 sm:px-6">
+          {children}
+        </main>
       </div>
     </>
   );

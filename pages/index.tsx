@@ -25,7 +25,7 @@ const Index: NextPage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        minHeight="100vh"
+        minHeight="90vh"
       >
         <Stack spacing={4}>
           <Typography variant="h2" align="center" fontFamily={"Ubuntu"}> tweetmike </Typography>
