@@ -1,32 +1,39 @@
-import { Box, Container, Grid, Link, Typography, Button } from '@mui/material'
-import { useAuth } from 'context/AuthContext'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type, { NextPage } from "next";
+import React, { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "context/AuthContext";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import Head from "next/head";
 
+const Index: NextPage = () => {
+  const router = useRouter();
+  const { login } = useAuth();
 
-const Home: NextPage = () => {
-
-  const { user, credential, logout } = useAuth()
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    try {
+      await login();
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <div className="|">
-          <title>tweetmike</title>
-          <link rel="icon" href="/favicon.ico" />
-        </div>
-      </Head>
-      {
-        credential ? (
-          <p> has credential </p>
-        ) : ( 
-          <p> no credential </p>)
-      }
-      <Button onClick={logout}> Sign Out</Button>
-      </div>
-  )
-}
+    <div className="container">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+      >
+        <Stack spacing={4}>
+          <Typography variant="h2" align="center" fontFamily={"Ubuntu"}> tweetmike </Typography>
+          <Button onClick={handleLogin}> sign in with twitter </Button>
+        </Stack>
+      </Box>
+    </div>
+  );
+};
 
-export default Home
+export default Index;

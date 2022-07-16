@@ -30,7 +30,7 @@ export const AuthContextProvider = ({
         setUser(user);
 
         let twitterCredentialCookie = null;
-        if (hasCookie("twitter_access_token") || hasCookie("twitter_secret")) {
+        if (hasCookie("twitter_access_token") && hasCookie("twitter_secret")) {
           const accessToken = getCookie("twitter_access_token")!.toString();
           const secret = getCookie("twitter_secret")!.toString();
           twitterCredentialCookie = TwitterAuthProvider.credential(
@@ -56,6 +56,8 @@ export const AuthContextProvider = ({
       const credential = TwitterAuthProvider.credentialFromResult(result);
       const accessToken = credential?.accessToken;
       const secret = credential?.secret;
+
+      setCredential(credential);
       setCookie("twitter_access_token", accessToken);
       setCookie("twitter_secret", secret);
     }
