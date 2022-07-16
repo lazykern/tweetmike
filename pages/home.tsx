@@ -1,25 +1,32 @@
-import { Box, Container, Grid, Link, Typography, Button } from '@mui/material'
-import { useAuth } from 'context/AuthContext'
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
+import {
+  Box,
+  Container,
+  Grid,
+  Link,
+  Typography,
+  Button,
+  Stack,
+} from "@mui/material";
+import { useAuth } from "context/AuthContext";
+import type { NextPage } from "next";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-
-  const { user, credential, logout } = useAuth()
+  const { user, credential, logout } = useAuth();
 
   return (
-    <div className={styles.container}>
-      {
-        credential ? (
-          <p> has credential </p>
-        ) : ( 
-          <p> no credential </p>)
-      }
-      <Button onClick={logout}> Sign Out</Button>
-      </div>
-  )
-}
+    <div>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="90vh"
+      >
+        <Button onClick={logout}> Sign Out</Button>
+      </Box>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

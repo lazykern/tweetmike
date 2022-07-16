@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-
-import { AuthContextProvider } from "context/AuthContext";
-import ProtectedRoute from "@components/ProtectedRoutes";
 import { useRouter } from "next/router";
 
 import { ThemeProvider } from "next-themes";
+
+import ProtectedRoute from "@components/ProtectedRoutes";
 import Layout from "@components/Layout";
+import { AuthContextProvider } from "context/AuthContext";
 
 const noAuthRoutes = ["/"];
 

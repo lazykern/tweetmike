@@ -2,6 +2,7 @@ import {useTheme} from "next-themes";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import {useState, useEffect} from "react";
+import { Typography } from "@mui/material";
 
 const Header = () => {
 
@@ -25,9 +26,10 @@ const Header = () => {
    };
 
   return (
-    <header className="h-15 shadow-sm dark:border-gray-700">
+    <header className="h-15">
       <div className="container  px-4 sm:px-6 py-4 flex justify-between items-center">
         {renderThemeChanger()}
+        <Typography fontFamily='Ubuntu'>in development</Typography>
       </div>
     </header>
   );
