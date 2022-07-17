@@ -1,3 +1,4 @@
+import React from 'react';
 import {createContext, useContext, useEffect, useState} from 'react';
 import {
   OAuthCredential,
@@ -7,11 +8,22 @@ import {
   TwitterAuthProvider,
   User,
 } from 'firebase/auth';
-import {firebase_auth} from '@modules/firebase';
+import {firebaseAuth} from '@modules/firebase';
 import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
-import {Snackbar} from '@mui/material';
 
-const AuthContext = createContext<any>({});
+interface AuthContext {
+  user: User | null;
+  credential: OAuthCredential | null;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContext>({
+  user: null,
+  credential: null,
+  login: async () => undefined,
+  logout: async () => undefined,
+});
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -25,13 +37,15 @@ export const AuthContextProvider = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(firebase_auth, (user) => {
+    const unsubscribe = onAuthStateChanged(firebaseAuth, user => {
       if (user) {
         setUser(user);
 
         let twitterCredentialCookie = null;
         if (hasCookie('twitter_access_token') && hasCookie('twitter_secret')) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const accessToken = getCookie('twitter_access_token')!.toString();
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const secret = getCookie('twitter_secret')!.toString();
           twitterCredentialCookie = TwitterAuthProvider.credential(
             accessToken,
@@ -51,7 +65,7 @@ export const AuthContextProvider = ({
 
   const login = async () => {
     const provider = new TwitterAuthProvider();
-    const result = await signInWithPopup(firebase_auth, provider);
+    const result = await signInWithPopup(firebaseAuth, provider);
     if (result.user) {
       const credential = TwitterAuthProvider.credentialFromResult(result);
       const accessToken = credential?.accessToken;
@@ -61,7 +75,6 @@ export const AuthContextProvider = ({
       setCookie('twitter_access_token', accessToken);
       setCookie('twitter_secret', secret);
     }
-    return result;
   };
 
   const logout = async () => {
@@ -69,11 +82,11 @@ export const AuthContextProvider = ({
     setCredential(null);
     deleteCookie('twitter_access_token');
     deleteCookie('twitter_secret');
-    await signOut(firebase_auth);
+    await signOut(firebaseAuth);
   };
 
   return (
-    <AuthContext.Provider value={{user, credential, logout, login}}>
+    <AuthContext.Provider value={{user, credential, login, logout}}>
       {loading ? null : children}
     </AuthContext.Provider>
   );

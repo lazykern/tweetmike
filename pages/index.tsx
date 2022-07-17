@@ -1,15 +1,14 @@
-import type, {NextPage} from 'next';
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
+import {NextPage} from 'next';
 import {useRouter} from 'next/router';
 import {useAuth} from 'context/AuthContext';
 import {Box, Button, Stack, Typography} from '@mui/material';
-import Head from 'next/head';
 
 const Index: NextPage = () => {
   const router = useRouter();
   const {login} = useAuth();
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
       await login();

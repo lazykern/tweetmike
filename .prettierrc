@@ -1,0 +1,12 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "trailingComma": "es5",
+  "arrowParens": "avoid",
+  "importOrder": ["^@components/(.*)$", "^@mui/(.*)$", "<THIRD_PARTY_MODULES>" ,"^[./]" ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+
+}
