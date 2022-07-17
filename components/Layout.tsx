@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './Header';
 import Head from 'next/head';
 

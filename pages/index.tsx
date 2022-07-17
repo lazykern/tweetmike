@@ -28,8 +28,7 @@ const Index: NextPage = () => {
       >
         <Stack spacing={4}>
           <Typography variant="h2" align="center" fontFamily={'Ubuntu'}>
-            {' '}
-            tweetmike{' '}
+            tweetmike
           </Typography>
           <Button onClick={handleLogin}> sign in with twitter </Button>
         </Stack>
