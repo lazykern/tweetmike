@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Head from 'next/head';
 
-const Layout = ({children}: {children: any}) => {
+const Layout = ({children}: {children: React.ReactNode}) => {
   return (
     <>
       <Head>
