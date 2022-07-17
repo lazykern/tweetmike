@@ -6,7 +6,7 @@ import {Box, Button, Stack, Typography} from '@mui/material';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const {login} = useAuth();
+  const {login, user} = useAuth();
 
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -30,7 +30,11 @@ const Index: NextPage = () => {
           <Typography variant="h2" align="center" fontFamily={'Ubuntu'}>
             tweetmike
           </Typography>
-          <Button onClick={handleLogin}> sign in with twitter </Button>
+          {user ? (
+            <Button onClick={() => router.push('home')}>go to home page</Button>
+          ) : (
+            <Button onClick={handleLogin}> sign in with twitter </Button>
+          )}
         </Stack>
       </Box>
     </div>
