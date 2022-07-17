@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button} from '@mui/material';
+import {Box, Button, Stack} from '@mui/material';
 import {useAuth} from 'context/AuthContext';
 import type {NextPage} from 'next';
 
@@ -14,7 +14,9 @@ const Home: NextPage = () => {
         alignItems="center"
         minHeight="90vh"
       >
-        <Button onClick={logout}> Sign Out</Button>
+        <Stack>
+          <Button onClick={logout}> Sign Out</Button>
+        </Stack>
       </Box>
     </div>
   );
