@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect, useState} from 'react';
 import {
   OAuthCredential,
   onAuthStateChanged,
@@ -6,10 +6,10 @@ import {
   signOut,
   TwitterAuthProvider,
   User,
-} from "firebase/auth";
-import { firebase_auth } from "@modules/firebase";
-import { setCookie, getCookie, hasCookie, deleteCookie} from "cookies-next";
-import { Snackbar } from "@mui/material";
+} from 'firebase/auth';
+import {firebase_auth} from '@modules/firebase';
+import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
+import {Snackbar} from '@mui/material';
 
 const AuthContext = createContext<any>({});
 
@@ -30,9 +30,9 @@ export const AuthContextProvider = ({
         setUser(user);
 
         let twitterCredentialCookie = null;
-        if (hasCookie("twitter_access_token") && hasCookie("twitter_secret")) {
-          const accessToken = getCookie("twitter_access_token")!.toString();
-          const secret = getCookie("twitter_secret")!.toString();
+        if (hasCookie('twitter_access_token') && hasCookie('twitter_secret')) {
+          const accessToken = getCookie('twitter_access_token')!.toString();
+          const secret = getCookie('twitter_secret')!.toString();
           twitterCredentialCookie = TwitterAuthProvider.credential(
             accessToken,
             secret
@@ -58,8 +58,8 @@ export const AuthContextProvider = ({
       const secret = credential?.secret;
 
       setCredential(credential);
-      setCookie("twitter_access_token", accessToken);
-      setCookie("twitter_secret", secret);
+      setCookie('twitter_access_token', accessToken);
+      setCookie('twitter_secret', secret);
     }
     return result;
   };
@@ -67,13 +67,13 @@ export const AuthContextProvider = ({
   const logout = async () => {
     setUser(null);
     setCredential(null);
-    deleteCookie("twitter_access_token");
-    deleteCookie("twitter_secret")
+    deleteCookie('twitter_access_token');
+    deleteCookie('twitter_secret');
     await signOut(firebase_auth);
   };
 
   return (
-    <AuthContext.Provider value={{ user, credential, logout, login }}>
+    <AuthContext.Provider value={{user, credential, logout, login}}>
       {loading ? null : children}
     </AuthContext.Provider>
   );

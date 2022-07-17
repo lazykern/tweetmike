@@ -1,7 +1,7 @@
-import Header from "./Header";
-import Head from "next/head";
+import Header from './Header';
+import Head from 'next/head';
 
-const Layout = ({ children}: {children: any}) => {
+const Layout = ({children}: {children: any}) => {
   return (
     <>
       <Head>
