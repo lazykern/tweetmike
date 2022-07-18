@@ -1,6 +1,5 @@
 import React from 'react';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import {Logout, DarkMode, LightMode} from '@mui/icons-material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,9 +12,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import {useAuth} from 'context/AuthContext';
 import {useTheme} from 'next-themes';
+import {WindowRounded} from '@mui/icons-material';
+import { CssBaseline } from '@mui/material';
 
 const pages = ['About'];
 const settings = ['Logout'];
@@ -39,19 +39,23 @@ const ResponsiveAppBar = () => {
 
     if (currentTheme === 'dark') {
       return (
-        <LightModeIcon
-          className="w-10 h-10 text-yellow-500 "
-          role="button"
+        <IconButton
+          size="large"
+          color="inherit"
           onClick={() => setTheme('light')}
-        />
+        >
+          <LightMode className="w-15 h-15 text-white " role="button" />
+        </IconButton>
       );
     } else {
       return (
-        <DarkModeIcon
-          className="w-10 h-10 text-gray-900 "
-          role="button"
+        <IconButton
+          size="large"
+          color="inherit"
           onClick={() => setTheme('dark')}
-        />
+        >
+          <DarkMode className="w-15 h-15 text-gray-900 " role="button" />
+        </IconButton>
       );
     }
   };
@@ -60,16 +64,19 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    if (user) {
+      window.open(
+        'https://twitter.com/intent/user?user_id=' + user?.providerData[0].uid
+      );
+    } else {
+      window.open('https://twitter.com');
+    }
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <AppBar position="static">
@@ -128,26 +135,25 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          {/* <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}} /> */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
-              display: {xs: 'flex', md: 'none'},
-              flexGrow: 1,
+              display: {xs: 'block', md: 'none'},
               fontFamily: 'Ubuntu',
               fontWeight: 700,
               letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
+              lineHeight: '2',
             }}
           >
             tweetmike
           </Typography>
+          </Box>
 
           <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
             {pages.map(page => (
@@ -160,35 +166,14 @@ const ResponsiveAppBar = () => {
               </Button>
             ))}
           </Box>
+          {renderThemeChanger()}
           {user ? (
             <Box sx={{flexGrow: 0}}>
-              <Tooltip title="Open settings">
+              <Tooltip title="Open profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                   <Avatar alt={displayName} src={photoURL} />
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{mt: '45px'}}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map(setting => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
             </Box>
           ) : null}
         </Toolbar>
