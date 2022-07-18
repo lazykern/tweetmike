@@ -10,18 +10,25 @@ const Design: NextPage = () => {
         <Grid container xs={12} sm={7} lg={9}>
           <Stack spacing={1} flex="1 1 0">
             <Card className="flex-grow" >
+              <CardContent>
               <p> API </p>
+              </CardContent>
             </Card>
             <Card className="flex-grow">
               <CardContent>
                 <p>Parameter and Description</p>
               </CardContent>
             </Card>
-            <Card className="flex-grow">
-              <CardContent>
-                <p> Response </p>
-              </CardContent>
-            </Card>
+              <Card className="flex-grow" sx={{
+                display: {
+                  xs: 'flex',
+                  sm: 'none',
+                }
+              }}>
+                <CardContent>
+                  <p> Response </p>
+                </CardContent>
+              </Card>
           </Stack>
         </Grid>
 
