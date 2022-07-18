@@ -1,7 +1,7 @@
 import React from 'react';
 import {NextPage} from 'next';
 import {useRouter} from 'next/router';
-import {useAuth} from 'contexts/AuthContext';
+import {useAuth} from '@contexts/AuthContext';
 import {Box, Button, Stack, Typography} from '@mui/material';
 
 const Index: NextPage = () => {
