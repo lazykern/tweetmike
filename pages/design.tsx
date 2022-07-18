@@ -1,32 +1,29 @@
 import React from 'react';
 import {NextPage} from 'next';
 
-import {Box, Card, CardContent, Grid, Paper, Stack} from '@mui/material';
+import {Card, CardContent, Grid,Stack, Typography} from '@mui/material';
 
 const Design: NextPage = () => {
   return (
     <div>
       <Grid container columnSpacing={1} sx={{height: '90vh'}}>
-        <Grid container xs={12} sm={7} lg={9}>
+        <Grid container xs={16} sm={7} lg={9}>
           <Stack spacing={1} flex="1 1 0">
-            <Card className="flex-grow" >
-              <CardContent>
-              <p> API </p>
+            <Card className="h-[10%] card-dark" >
+              <CardContent className='align-middle'>
               </CardContent>
             </Card>
-            <Card className="flex-grow">
+            <Card className="flex-grow  card-dark">
               <CardContent>
-                <p>Parameter and Description</p>
               </CardContent>
             </Card>
-              <Card className="flex-grow" sx={{
+              <Card className="flex-grow card-dark" sx={{
                 display: {
                   xs: 'flex',
                   sm: 'none',
                 }
               }}>
                 <CardContent>
-                  <p> Response </p>
                 </CardContent>
               </Card>
           </Stack>
@@ -39,9 +36,8 @@ const Design: NextPage = () => {
             lg: 'flex',
           }
         }>
-          <Card className="flex-grow">
+          <Card className="flex-grow card-dark">
             <CardContent>
-              <p> Response </p>
             </CardContent>
           </Card>
         </Grid>
