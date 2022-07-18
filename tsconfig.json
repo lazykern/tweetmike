@@ -16,6 +16,9 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
+      "@contexts/*": [
+        "contexts/*"
+      ],
       "@modules/*": ["modules/*"],
       "@components/*": ["components/*"]
     }

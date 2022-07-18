@@ -8,7 +8,8 @@ import {ThemeProvider} from 'next-themes';
 
 import ProtectedRoute from '@components/ProtectedRoutes';
 import Layout from '@components/Layout';
-import {AuthContextProvider} from 'context/AuthContext';
+import {AuthContextProvider} from '@contexts/AuthContext';
+import {TwitterContextProvider} from '@contexts/TwitterContext';
 
 const noAuthRoutes = ['/'];
 
@@ -16,17 +17,19 @@ function MyApp({Component, pageProps}: AppProps) {
   const router = useRouter();
   return (
     <AuthContextProvider>
-      <ThemeProvider enableSystem={true} attribute="class">
-        <Layout>
-          {noAuthRoutes.includes(router.pathname) ? (
-            <Component {...pageProps} />
-          ) : (
-            <ProtectedRoute>
+      <TwitterContextProvider>
+        <ThemeProvider enableSystem={true} attribute="class">
+          <Layout>
+            {noAuthRoutes.includes(router.pathname) ? (
               <Component {...pageProps} />
-            </ProtectedRoute>
-          )}
-        </Layout>
-      </ThemeProvider>
+            ) : (
+              <ProtectedRoute>
+                <Component {...pageProps} />
+              </ProtectedRoute>
+            )}
+          </Layout>
+        </ThemeProvider>
+      </TwitterContextProvider>
     </AuthContextProvider>
   );
 }
