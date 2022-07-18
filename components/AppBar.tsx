@@ -14,17 +14,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useAuth} from 'context/AuthContext';
 import {useTheme} from 'next-themes';
-import {WindowRounded} from '@mui/icons-material';
-import { CssBaseline } from '@mui/material';
 
 const pages = ['About'];
-const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
   const {user} = useAuth();
@@ -79,7 +73,7 @@ const ResponsiveAppBar = () => {
 
 
   return (
-    <AppBar position="static">
+    <AppBar color='transparent' position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -170,7 +164,7 @@ const ResponsiveAppBar = () => {
           {user ? (
             <Box sx={{flexGrow: 0}}>
               <Tooltip title="Open profile">
-                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                <IconButton id="profileButton" onClick={handleOpenUserMenu} sx={{p: 0}}>
                   <Avatar alt={displayName} src={photoURL} />
                 </IconButton>
               </Tooltip>
