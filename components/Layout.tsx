@@ -9,9 +9,9 @@ const Layout = ({children}: {children: React.ReactNode}) => {
         <title>tweetmike</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen mx-auto flex flex-col">
+      <div className=" mx-auto flex flex-col">
         <ResponsiveAppBar />
-        <main className="flex-grow container mx-auto px-4 sm:px-6">
+        <main className="flex-grow container mx-auto  ">
           {children}
         </main>
       </div>
