@@ -1,5 +1,5 @@
 import React from 'react';
-import {Logout, DarkMode, LightMode} from '@mui/icons-material';
+import {DarkMode, LightMode} from '@mui/icons-material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import {useAuth} from 'context/AuthContext';
+import {useAuth} from 'contexts/AuthContext';
 import {useTheme} from 'next-themes';
 
 const pages = ['About'];
@@ -57,7 +57,7 @@ const ResponsiveAppBar = () => {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleUserButton = () => {
     if (user) {
       window.open(
         'https://twitter.com/intent/user?user_id=' + user?.providerData[0].uid
@@ -164,7 +164,7 @@ const ResponsiveAppBar = () => {
           {user ? (
             <Box sx={{flexGrow: 0}}>
               <Tooltip title="Open profile">
-                <IconButton id="profileButton" onClick={handleOpenUserMenu} sx={{p: 0}}>
+                <IconButton id="profileButton" onClick={handleUserButton} sx={{p: 0}}>
                   <Avatar alt={displayName} src={photoURL} />
                 </IconButton>
               </Tooltip>
