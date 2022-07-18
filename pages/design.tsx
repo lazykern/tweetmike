@@ -1,12 +1,9 @@
 import React from 'react';
 import {NextPage} from 'next';
-import { useTheme } from 'next-themes';
 import {Col, ColsWrapper, Row, RowsWrapper} from 'react-grid-resizable';
 
 const Design: NextPage = () => {
-    const {theme, systemTheme} = useTheme();
 
-    const currentTheme = theme === 'system' ? systemTheme : theme;
     
   return (
     <div>
