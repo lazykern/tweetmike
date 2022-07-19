@@ -9,7 +9,6 @@ const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
 
   useEffect(() => {
     if (session === null) {
-      console.log('go back')
       router.push('/');
     }
   }, [router, session]);
