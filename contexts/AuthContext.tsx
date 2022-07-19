@@ -13,14 +13,14 @@ import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
 
 interface AuthContext {
   user: User | null;
-  credential: OAuthCredential | null;
+  twitterCredential: OAuthCredential | null;
   login: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContext>({
   user: null,
-  credential: null,
+  twitterCredential: null,
   login: async () => undefined,
   logout: async () => undefined,
 });
@@ -33,7 +33,7 @@ export const AuthContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [credential, setCredential] = useState<OAuthCredential | null>(null);
+  const [twitterCredential, setTwitterCredential] = useState<OAuthCredential | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,10 +52,10 @@ export const AuthContextProvider = ({
             secret
           );
         }
-        setCredential(twitterCredentialCookie);
+        setTwitterCredential(twitterCredentialCookie);
       } else {
         setUser(null);
-        setCredential(null);
+        setTwitterCredential(null);
       }
       setLoading(false);
     });
@@ -71,7 +71,7 @@ export const AuthContextProvider = ({
       const accessToken = credential?.accessToken;
       const secret = credential?.secret;
 
-      setCredential(credential);
+      setTwitterCredential(credential);
       setCookie('twitter_access_token', accessToken);
       setCookie('twitter_secret', secret);
     }
@@ -79,14 +79,14 @@ export const AuthContextProvider = ({
 
   const logout = async () => {
     setUser(null);
-    setCredential(null);
+    setTwitterCredential(null);
     deleteCookie('twitter_access_token');
     deleteCookie('twitter_secret');
     await signOut(firebaseAuth);
   };
 
   return (
-    <AuthContext.Provider value={{user, credential, login, logout}}>
+    <AuthContext.Provider value={{user, twitterCredential, login, logout}}>
       {loading ? null : children}
     </AuthContext.Provider>
   );
