@@ -76,7 +76,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar color="transparent" elevation={0} position="static">
+    <AppBar color="inherit" elevation={0} position="static">
       <Container>
         <Toolbar disableGutters>
           <Stack direction="row" flexGrow={1} flex={1}>
