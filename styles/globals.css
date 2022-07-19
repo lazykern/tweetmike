@@ -24,6 +24,10 @@ a {
   box-sizing: border-box;
 }
 
+.monospace {
+  font-family: 'JetBrains Mono', monospace;
+}
+
 .dev-helper .react-grid-item {
   border: 1px dotted red;
   display: flex;

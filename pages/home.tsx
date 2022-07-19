@@ -1,10 +1,9 @@
 import React from 'react';
 import {Box, Button, Stack} from '@mui/material';
-import {useAuth} from '@contexts/AuthContext';
+import { signOut } from 'next-auth/react';
 import type {NextPage} from 'next';
 
 const Home: NextPage = () => {
-  const {logout} = useAuth();
 
   return (
     <div>
@@ -15,7 +14,7 @@ const Home: NextPage = () => {
         minHeight="90vh"
       >
         <Stack>
-          <Button onClick={logout}> Sign Out</Button>
+          <Button onClick={()=>signOut()}> Sign Out</Button>
         </Stack>
       </Box>
     </div>
