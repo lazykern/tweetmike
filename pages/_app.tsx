@@ -9,7 +9,6 @@ import { ThemeProvider } from 'next-themes';
 import ProtectedRoute from '@components/ProtectedRoutes';
 import Layout from '@components/Layout';
 import {AuthContextProvider} from '@contexts/AuthContext';
-import {TwitterContextProvider} from '@contexts/TwitterContext';
 
 const noAuthRoutes = ['/'];
 
@@ -18,7 +17,6 @@ function MyApp({Component, pageProps}: AppProps) {
   const router = useRouter();
   return (
     <AuthContextProvider>
-      <TwitterContextProvider>
         <ThemeProvider defaultTheme='dark'>
             <Layout>
               {noAuthRoutes.includes(router.pathname) ? (
@@ -30,7 +28,6 @@ function MyApp({Component, pageProps}: AppProps) {
               )}
             </Layout>
         </ThemeProvider>
-      </TwitterContextProvider>
     </AuthContextProvider>
   );
 }

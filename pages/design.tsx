@@ -12,17 +12,25 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import { useAuth } from '@contexts/AuthContext';
 import {useTheme} from 'next-themes';
+import { TwitterApi, TwitterApiv2 } from 'twitter-api-v2';
+import { getCookie } from 'cookies-next';
+
+export async function getstaticProps() {
+  const {credential} = useAuth();
+
+  const appClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN!);
+  return {
+    props: {
+      appClient
+    },
+  };
+}
 
 const Design: NextPage = () => {
   const {theme, systemTheme} = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
-
-  // const {urlInput, setUrlInput} = useState<string>('');
-  //   const handleUrlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     setUrlInput(event.target.value);
-  //   }
-
 
   return (
     <div>
