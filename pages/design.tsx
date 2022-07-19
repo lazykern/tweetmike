@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
-import {NextPage} from 'next';
-import getConfig from 'next/config';
-const {publicRuntimeConfig} = getConfig();
-import dynamic from 'next/dynamic';
-const ReactJson = dynamic(() => import('react-json-view'), {ssr: false});
-
 import {Box, Button, Grid, Stack, TextField} from '@mui/material';
+
+import {NextPage} from 'next';
 import {useTheme} from 'next-themes';
+import getConfig from 'next/config';
+import dynamic from 'next/dynamic';
+import React, {useState} from 'react';
+
+const {publicRuntimeConfig} = getConfig();
+
+const ReactJson = dynamic(() => import('react-json-view'), {ssr: false});
 
 const Design: NextPage = () => {
   const {theme, systemTheme} = useTheme();
@@ -60,7 +62,7 @@ const Design: NextPage = () => {
           }}
         >
           <ReactJson
-          iconStyle='circle'
+            iconStyle="circle"
             style={{
               overflow: 'auto',
               textOverflow: 'clip',

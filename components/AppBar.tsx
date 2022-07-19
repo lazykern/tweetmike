@@ -1,8 +1,3 @@
-import React from 'react';
-import {signOut, useSession} from 'next-auth/react';
-import {getToken} from 'next-auth/jwt';
-import {useTheme} from 'next-themes';
-
 import {DarkMode, LightMode, Logout, Twitter} from '@mui/icons-material';
 import {
   AppBar,
@@ -18,6 +13,11 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+
+import {getToken} from 'next-auth/jwt';
+import {signOut, useSession} from 'next-auth/react';
+import {useTheme} from 'next-themes';
+import React from 'react';
 
 const pages = ['About'];
 
@@ -144,12 +144,12 @@ const ResponsiveAppBar = () => {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
               >
                 <MenuItem onClick={handleProfileButton}>
-                  <ListItemIcon >
-                  <Twitter fontSize="small"/> 
+                  <ListItemIcon>
+                    <Twitter fontSize="small" />
                   </ListItemIcon>
                   <Typography variant="body2">{displayName}</Typography>
                 </MenuItem>
-                <MenuItem onClick={()=>signOut()}>
+                <MenuItem onClick={() => signOut()}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>

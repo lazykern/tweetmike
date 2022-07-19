@@ -1,10 +1,9 @@
+import {ThemeProvider, createTheme} from '@mui/material';
+
+import {useSession} from 'next-auth/react';
+import {useTheme} from 'next-themes';
 import Head from 'next/head';
 import React, {Fragment} from 'react';
-
-import {useTheme} from 'next-themes';
-import {useSession} from 'next-auth/react';
-
-import {ThemeProvider, createTheme} from '@mui/material';
 
 import ResponsiveAppBar from './AppBar';
 import ScrollButton from './ScrollButton';
@@ -22,7 +21,7 @@ const Layout = ({children}: {children: React.ReactNode}) => {
     },
     typography: {
       fontFamily: 'Ubuntu',
-    }
+    },
   });
 
   return (
