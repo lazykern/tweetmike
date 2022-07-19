@@ -5,28 +5,8 @@ const {publicRuntimeConfig} = getConfig();
 import dynamic from 'next/dynamic';
 const ReactJson = dynamic(() => import('react-json-view'), {ssr: false});
 
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  TextField,
-} from '@mui/material';
-import { useAuth } from '@contexts/AuthContext';
+import {Box, Button, Grid, Stack, TextField} from '@mui/material';
 import {useTheme} from 'next-themes';
-import { TwitterApi, TwitterApiv2 } from 'twitter-api-v2';
-import { getCookie } from 'cookies-next';
-
-export async function getstaticProps() {
-  const {credential} = useAuth();
-
-  const appClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN!);
-  return {
-    props: {
-      appClient
-    },
-  };
-}
 
 const Design: NextPage = () => {
   const {theme, systemTheme} = useTheme();
@@ -35,19 +15,23 @@ const Design: NextPage = () => {
   return (
     <div>
       <Grid container columnSpacing={1} sx={{height: '90vh'}}>
-        <Grid container xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
+        <Grid item xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
           <Stack spacing={1} flex="1 1 auto">
             <Grid container spacing={1} alignItems="center">
-            <Grid item>
-            <Button> select </Button>
-            </Grid>
-            <Grid item flexGrow={1}> <TextField fullWidth={true} label='API endpoint'></TextField> </Grid>
+              <Grid item>
+                <Button> select </Button>
+              </Grid>
+              <Grid item flexGrow={1}>
+                {' '}
+                <TextField
+                  fullWidth={true}
+                  label="API endpoint"
+                ></TextField>{' '}
+              </Grid>
             </Grid>
             <Button> SEND </Button>
             <Box color={'white'}></Box>
-            <Box
-              display={{xs: 'flex', sm: 'none'}}
-            >
+            <Box display={{xs: 'flex', sm: 'none'}}>
               <ReactJson
                 style={{
                   overflow: 'auto',
@@ -68,7 +52,6 @@ const Design: NextPage = () => {
         </Grid>
 
         <Grid
-          container
           item
           sm={6}
           display={{
@@ -77,6 +60,7 @@ const Design: NextPage = () => {
           }}
         >
           <ReactJson
+          iconStyle='circle'
             style={{
               overflow: 'auto',
               textOverflow: 'clip',
@@ -84,6 +68,8 @@ const Design: NextPage = () => {
               whiteSpace: 'pre-wrap',
               maxHeight: '90vh',
               backgroundColor: 'transparent',
+              fontFamily: 'JetBrains Mono',
+              fontSize: '14px',
             }}
             theme={
               currentTheme === 'dark' ? 'summerfruit' : 'summerfruit:inverted'

@@ -1,37 +1,54 @@
 import React from 'react';
-import { useSession } from 'next-auth/react';
-import { getToken } from 'next-auth/jwt';
+import {signOut, useSession} from 'next-auth/react';
+import {getToken} from 'next-auth/jwt';
 import {useTheme} from 'next-themes';
 
-
-import {DarkMode, LightMode} from '@mui/icons-material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import {Stack} from '@mui/material';
+import {DarkMode, LightMode, Logout, Twitter} from '@mui/icons-material';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Stack,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 
 const pages = ['About'];
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const {user} = useAuth();
+  const {data: session} = useSession();
 
-  const displayName = user?.displayName ?? 'Guest';
-  const photoURL = user?.photoURL ?? '';
+  const displayName = session?.user?.name || 'Guest';
+  const photoURL = session?.user?.image || '';
 
   const {systemTheme, theme, setTheme} = useTheme();
+
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const userMenuOpen = Boolean(anchorElUser);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleProfileButton = () => {
+    if (session) {
+      const twitterSession: any = session?.twitter;
+      window.open('https://twitter.com/' + twitterSession.twitterHandle);
+    }
+  };
 
   const renderThemeChanger = () => {
     const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -61,23 +78,6 @@ const ResponsiveAppBar = () => {
     }
   };
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleUserButton = () => {
-    if (user) {
-      window.open(
-        'https://twitter.com/intent/user?user_id=' + user?.providerData[0].uid
-      );
-    } else {
-      window.open('https://twitter.com');
-    }
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   return (
     <AppBar color="inherit" elevation={0} position="static">
       <Container>
@@ -103,16 +103,59 @@ const ResponsiveAppBar = () => {
           </Stack>
 
           {renderThemeChanger()}
-          {user ? (
+          {session ? (
             <Box sx={{flexGrow: 0}}>
-              <Tooltip title="Open profile">
-                <IconButton
-                  id="profileButton"
-                  onClick={handleUserButton}
-                >
-                  <Avatar alt={displayName} src={photoURL} />
-                </IconButton>
-              </Tooltip>
+              <IconButton id="profileButton" onClick={handleOpenUserMenu}>
+                <Avatar alt={displayName} src={photoURL} />
+              </IconButton>
+              <Menu
+                anchorEl={anchorElUser}
+                id="user-menu"
+                open={userMenuOpen}
+                onClose={handleCloseUserMenu}
+                onClick={handleCloseUserMenu}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+              >
+                <MenuItem onClick={handleProfileButton}>
+                  <ListItemIcon >
+                  <Twitter fontSize="small"/> 
+                  </ListItemIcon>
+                  <Typography variant="body2">{displayName}</Typography>
+                </MenuItem>
+                <MenuItem onClick={()=>signOut()}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  <Typography variant="body2">sign out</Typography>
+                </MenuItem>
+              </Menu>
             </Box>
           ) : null}
         </Toolbar>

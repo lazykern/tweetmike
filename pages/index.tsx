@@ -11,7 +11,7 @@ const Index: NextPage = () => {
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
-      signIn();
+      signIn('twitter');
       router.push('/home');
     } catch (error) {
       console.log(error);

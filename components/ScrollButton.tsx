@@ -3,6 +3,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Fab, IconButton, Tooltip, Zoom} from '@mui/material';
 
 const ScrollButton: React.FC = () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
