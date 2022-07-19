@@ -4,19 +4,19 @@ import '../styles/globals.css';
 import type {AppProps} from 'next/app';
 import {useRouter} from 'next/router';
 
+import {SessionProvider} from "next-auth/react"
 import { ThemeProvider } from 'next-themes';
 
 import ProtectedRoute from '@components/ProtectedRoutes';
 import Layout from '@components/Layout';
-import {AuthContextProvider} from '@contexts/AuthContext';
 
 const noAuthRoutes = ['/'];
 
-function MyApp({Component, pageProps}: AppProps) {
+function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
 
   const router = useRouter();
   return (
-    <AuthContextProvider>
+    <SessionProvider session={session}>
         <ThemeProvider defaultTheme='dark'>
             <Layout>
               {noAuthRoutes.includes(router.pathname) ? (
@@ -28,7 +28,7 @@ function MyApp({Component, pageProps}: AppProps) {
               )}
             </Layout>
         </ThemeProvider>
-    </AuthContextProvider>
+    </SessionProvider>
   );
 }
 

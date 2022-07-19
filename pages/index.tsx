@@ -1,22 +1,24 @@
 import React from 'react';
 import {NextPage} from 'next';
 import {useRouter} from 'next/router';
-import {useAuth} from '@contexts/AuthContext';
+import { signIn, useSession } from 'next-auth/react';
 import {Box, Button, Stack, Typography} from '@mui/material';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const {login, user} = useAuth();
+  
 
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
-      await login();
+      signIn();
       router.push('/home');
     } catch (error) {
       console.log(error);
     }
   };
+
+  const {data: session} = useSession();
 
   return (
     <div className="container">
@@ -30,7 +32,7 @@ const Index: NextPage = () => {
           <Typography variant="h2" align="center" fontFamily={'Ubuntu'}>
             tweetmike
           </Typography>
-          {user ? (
+          {session ? (
             <Button onClick={() => router.push('home')}>go to home page</Button>
           ) : (
             <Button onClick={handleLogin}> sign in with twitter </Button>

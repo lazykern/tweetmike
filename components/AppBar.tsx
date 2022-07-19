@@ -1,4 +1,9 @@
 import React from 'react';
+import { useSession } from 'next-auth/react';
+import { getToken } from 'next-auth/jwt';
+import {useTheme} from 'next-themes';
+
+
 import {DarkMode, LightMode} from '@mui/icons-material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,8 +18,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import {useAuth} from '@contexts/AuthContext';
-import {useTheme} from 'next-themes';
 import {Stack} from '@mui/material';
 
 const pages = ['About'];
