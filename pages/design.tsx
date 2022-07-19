@@ -18,7 +18,7 @@ import { TwitterApi, TwitterApiv2 } from 'twitter-api-v2';
 import { getCookie } from 'cookies-next';
 
 export async function getstaticProps() {
-  const {credential} = useAuth();
+  const {twitterCredential} = useAuth();
 
   const appClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN!);
   return {
