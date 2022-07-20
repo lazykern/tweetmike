@@ -18,6 +18,8 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.1",
+    "@next/eslint-plugin-next": "^12.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
     "autoprefixer": "^10.4.7",
     "cookies-next": "^2.1.1",
     "core-js": "^3.23.5",
