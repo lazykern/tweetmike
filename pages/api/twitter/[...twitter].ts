@@ -36,7 +36,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     result = await client.get(url);
   } catch (err) {
-    return res.status(500).json({error: err});
+    console.log(err);
+    return res.status(500).json(err);
   } finally {
     return res.status(200).json(result);
   }
