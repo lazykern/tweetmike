@@ -26,7 +26,8 @@ export default function Home() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': '*',
       },
     }).then(res => res.json());
 

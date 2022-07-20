@@ -26,9 +26,11 @@ export default function Home() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': '*',
       },
-    }).then(res => res.json());
+    })
+      .then(res => res.json());
 
     response.then(res => {
       setLoading(false);
@@ -55,11 +57,10 @@ export default function Home() {
                 ></TextField>{' '}
               </Grid>
             </Grid>
-            { !loading ? (
-            <Button onClick={handleSendButton}> SEND </Button>) : (
-            <Button
-            disableRipple={true}
-            > SENDING... </Button>
+            {!loading ? (
+              <Button onClick={handleSendButton}> SEND </Button>
+            ) : (
+              <Button disableRipple={true}> SENDING... </Button>
             )}
             <Box color={'white'}></Box>
             <Box display={{xs: 'flex', sm: 'none'}}>
