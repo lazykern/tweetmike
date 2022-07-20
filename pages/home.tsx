@@ -7,6 +7,7 @@ import React, {useState} from 'react';
 export default function Home() {
   const [data, setData] = useState<object>({});
   const [endpoint, setEndpoint] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEndpoint(e.target.value);
@@ -14,8 +15,10 @@ export default function Home() {
 
   const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!endpoint) {
+      setLoading(false);
       return;
     }
 
@@ -28,6 +31,7 @@ export default function Home() {
     }).then(res => res.json());
 
     response.then(res => {
+      setLoading(false);
       setData(res);
     });
   };
@@ -51,7 +55,12 @@ export default function Home() {
                 ></TextField>{' '}
               </Grid>
             </Grid>
-            <Button onClick={handleSendButton}> SEND </Button>
+            { !loading ? (
+            <Button onClick={handleSendButton}> SEND </Button>) : (
+            <Button
+            disableRipple={true}
+            > SENDING... </Button>
+            )}
             <Box color={'white'}></Box>
             <Box display={{xs: 'flex', sm: 'none'}}>
               <StyledReactJson src={data} />
