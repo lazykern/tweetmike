@@ -25,7 +25,6 @@ export default function Home() {
     const response = fetch('/api/twitter/' + endpoint, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
         Accept: 'application/json',
         'User-Agent': '*',
       },
