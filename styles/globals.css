@@ -1,12 +1,12 @@
 :root {
   /* Your default theme */
-  --background: #ffffff;
-  --foreground: #151515;
+  --background: #fff;
+  --foreground: #000;
 }
 
 [data-theme='dark'] {
-  --background: #151515;
-  --foreground: #ffffff;
+  --background: #000;
+  --foreground: #fff;
 }
 
 body {

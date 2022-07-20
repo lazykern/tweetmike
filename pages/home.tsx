@@ -9,7 +9,7 @@ export default function Home() {
   const [endpoint, setEndpoint] = useState<string>('');
 
   const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setEndpoint(e.target.value);
+    setEndpoint(e.target.value);
   };
 
   const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,6 +21,10 @@ export default function Home() {
 
     const response = fetch('/api/twitter/' + endpoint, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
     }).then(res => res.json());
 
     response.then(res => {
