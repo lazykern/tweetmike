@@ -64,7 +64,7 @@ const ResponsiveAppBar = () => {
   const handleUserButton = () => {
     if (user) {
       window.open(
-        'https://twitter.com/intent/user?user_id=' + user?.providerData[0].uid
+        'https://twitter.com/' + user?.displayName
       );
     } else {
       window.open('https://twitter.com');

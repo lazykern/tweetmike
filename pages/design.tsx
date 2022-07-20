@@ -1,36 +1,34 @@
 import React, {useState} from 'react';
-import {NextPage} from 'next';
+import {NextPage, GetServerSideProps, GetServerSidePropsContext} from 'next';
 import getConfig from 'next/config';
-const {publicRuntimeConfig} = getConfig();
 import dynamic from 'next/dynamic';
 const ReactJson = dynamic(() => import('react-json-view'), {ssr: false});
 
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  TextField,
-} from '@mui/material';
-import { useAuth } from '@contexts/AuthContext';
+import {Box, Button, Grid, Stack, TextField} from '@mui/material';
 import {useTheme} from 'next-themes';
-import { TwitterApi, TwitterApiv2 } from 'twitter-api-v2';
-import { getCookie } from 'cookies-next';
 
-export async function getstaticProps() {
-  const {twitterCredential} = useAuth();
-
-  const appClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN!);
-  return {
-    props: {
-      appClient
-    },
-  };
-}
-
-const Design: NextPage = () => {
+export default function Design() {
   const {theme, systemTheme} = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
+
+  const [data, setData] = useState<object>({});
+  const [endpoint, setEndpoint] = useState<string>('');
+
+  const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEndpoint(e.target.value);
+  }
+
+  const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const response = fetch('/api/twitter/'+ endpoint, {
+      method: 'GET',
+    }).then(res => res.json());
+
+    response.then(res => {
+      setData(res);
+    });
+  };
 
   return (
     <div>
@@ -38,17 +36,24 @@ const Design: NextPage = () => {
         <Grid container xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
           <Stack spacing={1} flex="1 1 auto">
             <Grid container spacing={1} alignItems="center">
-            <Grid item>
-            <Button> select </Button>
+              <Grid item>
+                <Button> select </Button>
+              </Grid>
+              <Grid item flexGrow={1}>
+                {' '}
+                <TextField
+                  fullWidth={true}
+                  label="API endpoint"
+                  onChange={handleEndpointChange}
+                  value={endpoint}
+                ></TextField>{' '}
+              </Grid>
             </Grid>
-            <Grid item flexGrow={1}> <TextField fullWidth={true} label='API endpoint'></TextField> </Grid>
-            </Grid>
-            <Button> SEND </Button>
+            <Button onClick={handleSendButton}> SEND </Button>
             <Box color={'white'}></Box>
-            <Box
-              display={{xs: 'flex', sm: 'none'}}
-            >
+            <Box display={{xs: 'flex', sm: 'none'}}>
               <ReactJson
+                name="response"
                 style={{
                   overflow: 'auto',
                   textOverflow: 'clip',
@@ -61,7 +66,7 @@ const Design: NextPage = () => {
                     ? 'summerfruit'
                     : 'summerfruit:inverted'
                 }
-                src={publicRuntimeConfig.demoJson}
+                src={data}
               />
             </Box>
           </Stack>
@@ -77,6 +82,7 @@ const Design: NextPage = () => {
           }}
         >
           <ReactJson
+            name="response"
             style={{
               overflow: 'auto',
               textOverflow: 'clip',
@@ -88,12 +94,10 @@ const Design: NextPage = () => {
             theme={
               currentTheme === 'dark' ? 'summerfruit' : 'summerfruit:inverted'
             }
-            src={publicRuntimeConfig.demoJson}
+            src={data}
           />
         </Grid>
       </Grid>
     </div>
   );
-};
-
-export default Design;
+}

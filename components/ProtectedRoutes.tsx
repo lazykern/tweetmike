@@ -4,11 +4,11 @@ import {useAuth} from '@contexts/AuthContext';
 import {getCookie} from 'cookies-next';
 
 const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
-  const {user, twitterCredential, logout} = useAuth();
+  const {user, logout} = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!twitterCredential) {
+    if (!getCookie('twitter_access_token') || !getCookie('twitter_token_secret')) {
       logout().then(() => {
         router.push('/');
       });
