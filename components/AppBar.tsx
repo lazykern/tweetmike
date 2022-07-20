@@ -1,29 +1,40 @@
 import React from 'react';
-import {DarkMode, LightMode} from '@mui/icons-material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import {
+  Cloud,
+  ContentCopy,
+  ContentCut,
+  ContentPaste,
+  DarkMode,
+  LightMode,
+  Logout,
+  Twitter,
+} from '@mui/icons-material';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import {useAuth} from '@contexts/AuthContext';
 import {useTheme} from 'next-themes';
-import {Stack} from '@mui/material';
+import { StyledMenu } from './StyledMenu';
+import {
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  MenuList,
+  Stack,
+} from '@mui/material';
 
 const pages = ['About'];
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const {user} = useAuth();
+  const {user, logout} = useAuth();
 
   const displayName = user?.displayName ?? 'Guest';
   const photoURL = user?.photoURL ?? '';
@@ -58,21 +69,26 @@ const ResponsiveAppBar = () => {
     }
   };
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const userMenuOpen = Boolean(anchorElUser);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
   };
-  const handleUserButton = () => {
+
+  const handleOpenProfileButton = () => {
     if (user) {
-      window.open(
-        'https://twitter.com/' + user?.displayName
-      );
+      window.open('https://twitter.com/' + user?.displayName);
     } else {
       window.open('https://twitter.com');
     }
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   return (
@@ -102,14 +118,29 @@ const ResponsiveAppBar = () => {
           {renderThemeChanger()}
           {user ? (
             <Box sx={{flexGrow: 0}}>
-              <Tooltip title="Open profile">
-                <IconButton
-                  id="profileButton"
-                  onClick={handleUserButton}
-                >
-                  <Avatar alt={displayName} src={photoURL} />
-                </IconButton>
-              </Tooltip>
+              <IconButton id="profileButton" onClick={handleOpenUserMenu}>
+                <Avatar alt={displayName} src={photoURL} />
+              </IconButton>
+              <StyledMenu
+                anchorEL={anchorElUser}
+                open={userMenuOpen}
+                onClose={handleCloseUserMenu}
+                onClick={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleOpenProfileButton}>
+                  <ListItemIcon>
+                    <Twitter fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>profile</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={logout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>sign out</ListItemText>
+                </MenuItem>
+              </StyledMenu>
             </Box>
           ) : null}
         </Toolbar>
