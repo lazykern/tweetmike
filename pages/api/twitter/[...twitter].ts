@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).json({error: 'Method Not Allowed'});
   }
 
-  if (!req.query || !req.query.twitter ) {
+  if (!req.query || !req.query.twitter) {
     return res.status(400).json({error: 'Missing query'});
   }
 
@@ -24,32 +24,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     consumer_key: process.env.TWITTER_CONSUMER_KEY!,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET!,
     access_token_key: getCookie('twitter_access_token', {req, res})?.toString(),
-    access_token_secret: getCookie('twitter_token_secret', {req, res})?.toString(),
-  })
+    access_token_secret: getCookie('twitter_token_secret', {
+      req,
+      res,
+    })?.toString(),
+  });
 
-  let {twitter: endpoint} = req.query;
-
-
-  client.get(
-  (<string[]>endpoint).join('/')
-  ).then(data => {
-    console.log(data);
-    return data;
-  }).catch(err => {
-    console.log(err);
-    return err;
-  })
+  const url = req.url!.replace('/api/twitter/', '');
 
   let result = {} as any;
   try {
-    result = await client.get(
-      (<string[]>endpoint).join('/')
-    );
+    result = await client.get(url);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({error: err});
   } finally {
-    console.log(result);
     return res.status(200).json(result);
   }
 };

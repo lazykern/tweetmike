@@ -9,11 +9,7 @@ export default function Design() {
   const [endpoint, setEndpoint] = useState<string>('');
 
   const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) {
-      setEndpoint('users/me');
-    } else {
       setEndpoint(e.target.value);
-    }
   };
 
   const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,7 +31,7 @@ export default function Design() {
   return (
     <div>
       <Grid container columnSpacing={1} sx={{height: '90vh'}}>
-        <Grid container xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
+        <Grid item xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
           <Stack spacing={1} flex="1 1 auto">
             <Grid container spacing={1} alignItems="center">
               <Grid item>
@@ -60,7 +56,6 @@ export default function Design() {
         </Grid>
 
         <Grid
-          container
           item
           sm={6}
           display={{
