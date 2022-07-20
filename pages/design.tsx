@@ -2,9 +2,6 @@ import StyledReactJson from '@components/StyledReactJson';
 
 import {Box, Button, Grid, Stack, TextField} from '@mui/material';
 
-import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
-import {useTheme} from 'next-themes';
-import getConfig from 'next/config';
 import React, {useState} from 'react';
 
 export default function Design() {
@@ -12,11 +9,19 @@ export default function Design() {
   const [endpoint, setEndpoint] = useState<string>('');
 
   const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEndpoint(e.target.value);
+    if (!e.target.value) {
+      setEndpoint('users/me');
+    } else {
+      setEndpoint(e.target.value);
+    }
   };
 
   const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!endpoint) {
+      return;
+    }
 
     const response = fetch('/api/twitter/' + endpoint, {
       method: 'GET',

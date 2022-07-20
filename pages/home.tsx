@@ -3,6 +3,7 @@ import {Box, Button, Stack} from '@mui/material';
 import {useAuth} from '@contexts/AuthContext';
 import type {NextPage} from 'next';
 import React from 'react';
+import { IClientSettings, TwitterApi } from 'twitter-api-v2';
 
 const Home: NextPage = () => {
   const {logout} = useAuth();
