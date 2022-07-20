@@ -30,7 +30,7 @@ export default function Home() {
         'User-Agent': '*',
       },
     })
-      .then(res => res.json());
+      .then(res => res.json()).catch(err => err.json());
 
     response.then(res => {
       setLoading(false);
