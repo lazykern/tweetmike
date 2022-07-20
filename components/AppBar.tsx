@@ -96,36 +96,36 @@ const ResponsiveAppBar = () => {
       <Container>
         <Toolbar disableGutters>
           <Stack direction="row" flexGrow={1} flex={1}>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                fontFamily: 'Ubuntu',
-                fontWeight: 700,
-                letterSpacing: '.1rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                alignmentBaseline: 'central',
-              }}
-            >
-              tweetmike
-            </Typography>
+            <Box flexGrow={0}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: 700,
+                  letterSpacing: '.1rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  alignmentBaseline: 'central',
+                }}
+              >
+                tweetmike
+              </Typography>
+            </Box>
           </Stack>
 
           {renderThemeChanger()}
           {user ? (
-            <Box sx={{flexGrow: 0}}>
+            <Box flexGrow={0}>
               <IconButton id="profileButton" onClick={handleOpenUserMenu}>
                 <Avatar alt={displayName} src={photoURL} />
               </IconButton>
               <StyledMenu
                 anchorEL={anchorElUser}
-                open={userMenuOpen}
                 onClose={handleCloseUserMenu}
-                onClick={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleOpenProfileButton}>
                   <ListItemIcon>

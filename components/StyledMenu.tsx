@@ -5,16 +5,15 @@ export const StyledMenu = ({
   children,
   id,
   anchorEL,
-  open,
   onClose,
 }: {
   children: React.ReactNode;
   id?: string | undefined;
   anchorEL: HTMLElement | null;
-  open: boolean;
-  onClose: () => void;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClose?: () => void;
 }) => {
+  const open = Boolean(anchorEL);
+
   return (
     <Menu
       id={id}

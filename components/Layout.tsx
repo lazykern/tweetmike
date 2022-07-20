@@ -17,7 +17,10 @@ const Layout = ({children}: {children: React.ReactNode}) => {
     {
       palette: {
         mode: currentTheme as 'light' | 'dark',
-      }
+      },
+      typography: {
+        fontFamily: 'Ubuntu, sans-serif',
+      },
     }
   );
 
