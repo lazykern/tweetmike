@@ -1,7 +1,8 @@
 import {Menu} from '@mui/material';
+
 import React from 'react';
 
-export const StyledMenu = ({
+const StyledMenu = ({
   children,
   id,
   anchorEL,
@@ -42,3 +43,5 @@ export const StyledMenu = ({
     </Menu>
   );
 };
+
+export default StyledMenu;

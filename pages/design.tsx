@@ -1,27 +1,24 @@
-import React, {useState} from 'react';
-import {NextPage, GetServerSideProps, GetServerSidePropsContext} from 'next';
-import getConfig from 'next/config';
-import dynamic from 'next/dynamic';
-const ReactJson = dynamic(() => import('react-json-view'), {ssr: false});
+import StyledReactJson from '@components/StyledReactJson';
 
 import {Box, Button, Grid, Stack, TextField} from '@mui/material';
+
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
 import {useTheme} from 'next-themes';
+import getConfig from 'next/config';
+import React, {useState} from 'react';
 
 export default function Design() {
-  const {theme, systemTheme} = useTheme();
-  const currentTheme = theme === 'system' ? systemTheme : theme;
-
   const [data, setData] = useState<object>({});
   const [endpoint, setEndpoint] = useState<string>('');
 
   const handleEndpointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEndpoint(e.target.value);
-  }
+  };
 
   const handleSendButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const response = fetch('/api/twitter/'+ endpoint, {
+    const response = fetch('/api/twitter/' + endpoint, {
       method: 'GET',
     }).then(res => res.json());
 
@@ -52,22 +49,7 @@ export default function Design() {
             <Button onClick={handleSendButton}> SEND </Button>
             <Box color={'white'}></Box>
             <Box display={{xs: 'flex', sm: 'none'}}>
-              <ReactJson
-                name="response"
-                style={{
-                  overflow: 'auto',
-                  textOverflow: 'clip',
-                  overflowWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  backgroundColor: 'transparent',
-                }}
-                theme={
-                  currentTheme === 'dark'
-                    ? 'summerfruit'
-                    : 'summerfruit:inverted'
-                }
-                src={data}
-              />
+              <StyledReactJson src={data} />
             </Box>
           </Stack>
         </Grid>
@@ -81,21 +63,7 @@ export default function Design() {
             sm: 'flex',
           }}
         >
-          <ReactJson
-            name="response"
-            style={{
-              overflow: 'auto',
-              textOverflow: 'clip',
-              overflowWrap: 'break-word',
-              whiteSpace: 'pre-wrap',
-              maxHeight: '90vh',
-              backgroundColor: 'transparent',
-            }}
-            theme={
-              currentTheme === 'dark' ? 'summerfruit' : 'summerfruit:inverted'
-            }
-            src={data}
-          />
+          <StyledReactJson src={data} />
         </Grid>
       </Grid>
     </div>

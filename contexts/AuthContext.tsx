@@ -1,15 +1,15 @@
-import React from 'react';
-import {createContext, useContext, useEffect, useState} from 'react';
+import {firebaseAuth} from '@modules/firebase';
+import {deleteCookie, getCookie, hasCookie, setCookie} from 'cookies-next';
 import {
   OAuthCredential,
+  TwitterAuthProvider,
+  User,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
-  TwitterAuthProvider,
-  User,
 } from 'firebase/auth';
-import {firebaseAuth} from '@modules/firebase';
-import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
+import React from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 
 interface AuthContext {
   user: User | null;
@@ -37,7 +37,6 @@ export const AuthContextProvider = ({
     const unsubscribe = onAuthStateChanged(firebaseAuth, user => {
       if (user) {
         setUser(user);
-
       } else {
         setUser(null);
       }
@@ -52,7 +51,7 @@ export const AuthContextProvider = ({
     const result = await signInWithPopup(firebaseAuth, provider);
     if (result.user) {
       console.log('user', result);
-      const resultCopy:any = {...result};
+      const resultCopy: any = {...result};
       const tokenResponse = await resultCopy._tokenResponse;
       setCookie('twitter_access_token', tokenResponse.oauthAccessToken);
       setCookie('twitter_token_secret', tokenResponse.oauthTokenSecret);

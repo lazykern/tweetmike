@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Cloud,
   ContentCopy,
@@ -20,9 +19,6 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import {useAuth} from '@contexts/AuthContext';
-import {useTheme} from 'next-themes';
-import { StyledMenu } from './StyledMenu';
 import {
   Divider,
   ListItemIcon,
@@ -30,6 +26,12 @@ import {
   MenuList,
   Stack,
 } from '@mui/material';
+
+import {useAuth} from '@contexts/AuthContext';
+import {useTheme} from 'next-themes';
+import React from 'react';
+
+import StyledMenu from './StyledMenu';
 
 const pages = ['About'];
 
@@ -123,10 +125,7 @@ const ResponsiveAppBar = () => {
               <IconButton id="profileButton" onClick={handleOpenUserMenu}>
                 <Avatar alt={displayName} src={photoURL} />
               </IconButton>
-              <StyledMenu
-                anchorEL={anchorElUser}
-                onClose={handleCloseUserMenu}
-              >
+              <StyledMenu anchorEL={anchorElUser} onClose={handleCloseUserMenu}>
                 <MenuItem onClick={handleOpenProfileButton}>
                   <ListItemIcon>
                     <Twitter fontSize="small" />

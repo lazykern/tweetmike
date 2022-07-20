@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react';
-import {useRouter} from 'next/router';
 import {useAuth} from '@contexts/AuthContext';
 import {getCookie} from 'cookies-next';
+import {useRouter} from 'next/router';
+import React, {useEffect} from 'react';
 
 const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
   const {user, logout} = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!getCookie('twitter_access_token') || !getCookie('twitter_token_secret')) {
+    if (
+      !getCookie('twitter_access_token') ||
+      !getCookie('twitter_token_secret')
+    ) {
       logout().then(() => {
         router.push('/');
       });

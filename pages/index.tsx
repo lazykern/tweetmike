@@ -1,8 +1,9 @@
-import React from 'react';
+import {Box, Button, Stack, Typography} from '@mui/material';
+
+import {useAuth} from '@contexts/AuthContext';
 import {NextPage} from 'next';
 import {useRouter} from 'next/router';
-import {useAuth} from '@contexts/AuthContext';
-import {Box, Button, Stack, Typography} from '@mui/material';
+import React from 'react';
 
 const Index: NextPage = () => {
   const router = useRouter();

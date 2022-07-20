@@ -1,7 +1,8 @@
-import React from 'react';
 import {Box, Button, Stack} from '@mui/material';
+
 import {useAuth} from '@contexts/AuthContext';
 import type {NextPage} from 'next';
+import React from 'react';
 
 const Home: NextPage = () => {
   const {logout} = useAuth();

@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Fab, IconButton, Tooltip, Zoom} from '@mui/material';
+
+import React, {useState} from 'react';
 
 const ScrollButton: React.FC = () => {
   const [visible, setVisible] = useState(false);
