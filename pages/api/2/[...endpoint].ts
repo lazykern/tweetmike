@@ -41,10 +41,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const roUserClient = userClient.readOnly.v2;
 
-  const url = req.url!.replace('/api/2/', '');
-
+  let query = req.query;
+  const endpoint = (query.endpoint as string[]).join('/');
+  delete query.endpoint;
+ 
   try {
-    const result = await roUserClient.get(url);
+    const result = await roUserClient.get(endpoint, { ...query });
     return res.status(200).json(result);
   } catch (err) {
     console.error(err);

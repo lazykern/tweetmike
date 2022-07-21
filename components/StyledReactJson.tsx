@@ -8,7 +8,7 @@ const StyledReactJson = ({src}: {src: object}) => {
   const currentTheme = theme === 'system' ? systemTheme : theme;
   return (
     <ReactJson
-      name="response"
+      name={false}
       style={{
         overflow: 'auto',
         textOverflow: 'clip',
@@ -16,7 +16,7 @@ const StyledReactJson = ({src}: {src: object}) => {
         whiteSpace: 'pre-wrap',
         backgroundColor: 'transparent',
         fontFamily: 'JetBrains Mono',
-        fontSize: '12px',
+        fontSize: '13px',
       }}
       theme={currentTheme === 'dark' ? 'summerfruit' : 'summerfruit:inverted'}
       src={src}
