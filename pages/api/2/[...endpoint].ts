@@ -47,6 +47,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const result = await roUserClient.get(url);
     return res.status(200).json(result);
   } catch (err) {
+    console.error(err);
     return res.status(500).json(err);
   }
 };
