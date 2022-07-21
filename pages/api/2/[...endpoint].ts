@@ -1,13 +1,14 @@
 import {getCookie} from 'cookies-next';
 import {NextApiRequest, NextApiResponse} from 'next';
 import Twitter from 'twitter-lite';
+import { TwitterApi } from 'twitter-api-v2';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     res.status(405).json({error: 'Method Not Allowed'});
   }
 
-  if (!req.query || !req.query.twitter) {
+  if (!req.query) {
     return res.status(400).json({error: 'Missing query'});
   }
 
@@ -30,15 +31,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })?.toString(),
   });
 
-  const url = req.url!.replace('/api/twitter/', '');
+  const userClient = new TwitterApi({
+    appKey: process.env.TWITTER_CONSUMER_KEY!,
+    appSecret: process.env.TWITTER_CONSUMER_SECRET!,
+    accessToken: getCookie('twitter_access_token', {req, res})?.toString(),
+    accessSecret: getCookie('twitter_token_secret', { req, res })?.toString(),
 
-  let result = {} as any;
+  })
+
+  const roUserClient = userClient.readOnly.v2;
+
+  const url = req.url!.replace('/api/2/', '');
+
   try {
-    result = await client.get(url);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  } finally {
+    const result = await roUserClient.get(url);
     return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json(err);
   }
 };
