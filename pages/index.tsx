@@ -13,7 +13,7 @@ const Index: NextPage = () => {
     e.preventDefault();
     try {
       await login();
-      router.push('/home');
+      router.push('/playground');
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +32,7 @@ const Index: NextPage = () => {
             tweetmike
           </Typography>
           {user ? (
-            <Button onClick={() => router.push('home')}>go to home page</Button>
+            <Button onClick={() => router.push('playground')}>go to playground</Button>
           ) : (
             <Button onClick={handleLogin}> sign in with twitter </Button>
           )}
