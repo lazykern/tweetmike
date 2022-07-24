@@ -1,0 +1,46 @@
+:root {
+  /* Your default theme */
+  --background: #fff;
+  --foreground: #0f1419;
+  --code-background: #f8f8f8;
+}
+
+[data-theme='dark'] {
+  --background: #000;
+  --foreground: #d6d9db;
+  --code-background: #151515;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none#1f1f20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dev-helper .react-grid-item {
+  border: 1px dotted red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding: 0 2rem;
+}
+
+.code-block {
+  background: var(--code-background);
+}

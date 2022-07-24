@@ -1,0 +1,4698 @@
+[
+  {
+    "id": "listIdCreate",
+    "name": "Create List",
+    "scopes": ["users.read", "tweet.read", "list.write", "list.read"],
+    "method": "POST",
+    "url": "/2/lists",
+    "params": [
+      {
+        "name": "name",
+        "role": "body",
+        "description": "The name of the List you wish to create.",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "role": "body",
+        "description": "Description of the List.",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "private",
+        "role": "body",
+        "description": "Determine whether the List should be private.",
+        "type": "boolean",
+        "required": false
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listIdDelete",
+    "name": "Delete List",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "DELETE",
+    "url": "/2/lists/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List to delete.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listIdGet",
+    "name": "List lookup by List ID.",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/lists/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list.fields",
+        "role": "query",
+        "description": "A comma separated list of List fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "follower_count",
+          "id",
+          "member_count",
+          "name",
+          "owner_id",
+          "private"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["owner_id"]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listIdUpdate",
+    "name": "Update List.",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "PUT",
+    "url": "/2/lists/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List to modify.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "description",
+        "role": "body",
+        "description": "Updates the description of the List.",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "name",
+        "role": "body",
+        "description": "Updates the name of the List.",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "private",
+        "role": "body",
+        "description": "Determines whether the List should be private.",
+        "type": "boolean",
+        "required": false
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listGetFollowers",
+    "name": "Returns User objects that follow a List by the provided List ID",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/lists/:id/followers",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "listGetMembers",
+    "name": "Returns User objects that are members of a List by the provided List ID.",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/lists/:id/members",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "listAddMember",
+    "name": "Add a List member",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "POST",
+    "url": "/2/lists/:id/members",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List for which to add a member.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user_id",
+        "role": "body",
+        "description": "The ID of the user you wish to add as a member of the List.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listRemoveMember",
+    "name": "Remove a List member",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "DELETE",
+    "url": "/2/lists/:id/members/:user_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List to remove a member.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user_id",
+        "role": "path",
+        "description": "The ID of User that will be removed from the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listsIdTweets",
+    "name": "List Tweets timeline by List ID.",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/lists/:id/tweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "findSpacesByIds",
+    "name": "Space lookup up Space IDs",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces",
+    "params": [
+      {
+        "name": "ids",
+        "role": "query",
+        "description": "The list of Space IDs to return.",
+        "type": "array",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "space.fields",
+        "role": "query",
+        "description": "A comma separated list of Space fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "creator_id",
+          "ended_at",
+          "host_ids",
+          "id",
+          "invited_user_ids",
+          "is_ticketed",
+          "lang",
+          "participant_count",
+          "scheduled_start",
+          "speaker_ids",
+          "started_at",
+          "state",
+          "subscriber_count",
+          "title",
+          "topic_ids",
+          "updated_at"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "creator_id",
+          "host_ids",
+          "invited_user_ids",
+          "speaker_ids",
+          "topic_ids"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "topic.fields",
+        "role": "query",
+        "description": "A comma separated list of Topic fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["description", "id", "name"]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/spaces"
+  },
+  {
+    "id": "findSpacesByCreatorIds",
+    "name": "Space lookup by their creators",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces/by/creator_ids",
+    "params": [
+      {
+        "name": "user_ids",
+        "role": "query",
+        "description": "The IDs of Users to search through.",
+        "type": "array",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "space.fields",
+        "role": "query",
+        "description": "A comma separated list of Space fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "creator_id",
+          "ended_at",
+          "host_ids",
+          "id",
+          "invited_user_ids",
+          "is_ticketed",
+          "lang",
+          "participant_count",
+          "scheduled_start",
+          "speaker_ids",
+          "started_at",
+          "state",
+          "subscriber_count",
+          "title",
+          "topic_ids",
+          "updated_at"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "creator_id",
+          "host_ids",
+          "invited_user_ids",
+          "speaker_ids",
+          "topic_ids"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "topic.fields",
+        "role": "query",
+        "description": "A comma separated list of Topic fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["description", "id", "name"]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/spaces"
+  },
+  {
+    "id": "searchSpaces",
+    "name": "Search for Spaces",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces/search",
+    "params": [
+      {
+        "name": "query",
+        "role": "query",
+        "description": "The search query.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "state",
+        "role": "query",
+        "description": "The state of Spaces to search for.",
+        "type": "string",
+        "radio": true,
+        "required": false,
+        "allowedValues": ["live", "scheduled", "all"]
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The number of results to return.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "space.fields",
+        "role": "query",
+        "description": "A comma separated list of Space fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "creator_id",
+          "ended_at",
+          "host_ids",
+          "id",
+          "invited_user_ids",
+          "is_ticketed",
+          "lang",
+          "participant_count",
+          "scheduled_start",
+          "speaker_ids",
+          "started_at",
+          "state",
+          "subscriber_count",
+          "title",
+          "topic_ids",
+          "updated_at"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "creator_id",
+          "host_ids",
+          "invited_user_ids",
+          "speaker_ids",
+          "topic_ids"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "topic.fields",
+        "role": "query",
+        "description": "A comma separated list of Topic fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["description", "id", "name"]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/spaces"
+  },
+  {
+    "id": "findSpaceById",
+    "name": "Space lookup by Space ID",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the Space to be retrieved.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "space.fields",
+        "role": "query",
+        "description": "A comma separated list of Space fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "creator_id",
+          "ended_at",
+          "host_ids",
+          "id",
+          "invited_user_ids",
+          "is_ticketed",
+          "lang",
+          "participant_count",
+          "scheduled_start",
+          "speaker_ids",
+          "started_at",
+          "state",
+          "subscriber_count",
+          "title",
+          "topic_ids",
+          "updated_at"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "creator_id",
+          "host_ids",
+          "invited_user_ids",
+          "speaker_ids",
+          "topic_ids"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "topic.fields",
+        "role": "query",
+        "description": "A comma separated list of Topic fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["description", "id", "name"]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/spaces"
+  },
+  {
+    "id": "spaceBuyers",
+    "name": "Retrieve the list of Users who purchased a ticket to the given space",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces/:id/buyers",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the Space to be retrieved.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "spaceTweets",
+    "name": "Retrieve Tweets from a Space.",
+    "scopes": ["users.read", "tweet.read", "space.read"],
+    "method": "GET",
+    "url": "/2/spaces/:id/tweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the Space to be retrieved.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The number of Tweets to fetch from the provided space. If not provided, the value will default to the maximum of 100.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "findTweetsById",
+    "name": "Tweet lookup by Tweet IDs",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/tweets",
+    "params": [
+      {
+        "name": "ids",
+        "role": "query",
+        "description": "A comma separated list of Tweet IDs. Up to 100 are allowed in a single request.",
+        "type": "array",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "createTweet",
+    "name": "Creation of a Tweet",
+    "scopes": ["users.read", "tweet.read", "tweet.write"],
+    "method": "POST",
+    "url": "/2/tweets",
+    "params": [
+      {
+        "name": "direct_message_deep_link",
+        "role": "body",
+        "description": "Tweets a link directly to a Direct Message conversation with an account.",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "for_super_followers_only",
+        "role": "body",
+        "description": "Allows you to Tweet exclusively for Super Followers.",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "geo",
+        "role": "body",
+        "description": "A JSON object that contains location information for a Tweet. You can only add a location to Tweets if you have geo enabled in your profile settings. If you don't have geo enabled, you can still add a location parameter in your request body, but it won't get attached to your Tweet",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "geo.place_id",
+            "role": "body",
+            "description": "Place ID being attached to the Tweet for geo location.",
+            "type": "string",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "media",
+        "role": "body",
+        "description": "A JSON object that contains media information being attached to created Tweet. This is mutually exclusive from Quote Tweet ID and Poll.",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "media.media_ids",
+            "role": "body",
+            "description": "A list of Media IDs being attached to the Tweet. This is only required if the request includes the tagged_user_ids.",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "media.tagged_user_ids",
+            "role": "body",
+            "description": "A list of User IDs being tagged in the Tweet with Media. If the user you're tagging doesn't have photo-tagging enabled, their names won't show up in the list of tagged users even though the Tweet is successfully created.",
+            "type": "array",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "poll",
+        "role": "body",
+        "description": "A JSON object that contains options for a Tweet with a poll. This is mutually exclusive from Media and Quote Tweet ID.",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "poll.duration_minutes",
+            "role": "body",
+            "description": "Duration of the poll in minutes for a Tweet with a poll. This is only required if the request includes poll.options.",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "poll.options",
+            "role": "body",
+            "description": "A list of poll options for a Tweet with a poll. For the request to be successful it must also include duration_minutes too.",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "poll.reply_settings",
+            "role": "body",
+            "description": "Settings to indicate who can reply to the Tweet. Options include \"mentionedUsers\" and \"following\". If the field isn\u2019t specified, it will default to everyone.",
+            "type": "string",
+            "required": false,
+            "allowedValues": ["mentionedUsers", "following"]
+          }
+        ]
+      },
+      {
+        "name": "quote_tweet_id",
+        "role": "body",
+        "description": "Link to the Tweet being quoted.",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "reply",
+        "role": "body",
+        "description": "A JSON object that contains information of the Tweet being replied to.",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "reply.exclude_reply_user_ids",
+            "role": "body",
+            "description": "A list of User IDs to be excluded from the reply Tweet thus removing a user from a thread.",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "reply.in_reply_to_tweet_id",
+            "role": "body",
+            "description": "Tweet ID of the Tweet being replied to. Please note that in_reply_to_tweet_id needs to be in the request if exclude_reply_user_ids is present.",
+            "type": "string",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "reply_settings",
+        "role": "body",
+        "description": "Settings to indicate who can reply to the Tweet. Options include \"mentionedUsers\" and \"following\". If the field isn\u2019t specified, it will default to everyone.",
+        "type": "string",
+        "required": false,
+        "allowedValues": ["mentionedUsers", "following"]
+      },
+      {
+        "name": "text",
+        "role": "body",
+        "description": "Text of the Tweet being created. This field is required if media.media_ids is not present.",
+        "type": "string",
+        "multiline": true,
+        "required": false
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "tweetsRecentSearch",
+    "name": "Recent search",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/tweets/search/recent",
+    "params": [
+      {
+        "name": "query",
+        "role": "query",
+        "description": "One query/rule/filter for matching Tweets. Refer to https://t.co/rulelength to identify the max query length.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The oldest UTC timestamp from which the Tweets will be provided. Timestamp is in second granularity and is inclusive (i.e. 12:00:01 includes the first second of the minute).",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "end_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The newest, most recent UTC timestamp to which the Tweets will be provided. Timestamp is in second granularity and is exclusive (i.e. 12:00:01 excludes the first second of the minute).",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "since_id",
+        "role": "query",
+        "description": "Returns results with a Tweet ID greater than (that is, more recent than) the specified ID.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "until_id",
+        "role": "query",
+        "description": "Returns results with a Tweet ID less than (that is, older than) the specified ID.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of search results to be returned by a request.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "next_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results. The value used with the parameter is pulled directly from the response provided by the API, and should not be modified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results. The value used with the parameter is pulled directly from the response provided by the API, and should not be modified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "sort_order",
+        "role": "query",
+        "description": "This order in which to return results.",
+        "type": "string",
+        "radio": true,
+        "required": false,
+        "allowedValues": ["recency", "relevancy"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "deleteTweetById",
+    "name": "Tweet delete by Tweet ID",
+    "scopes": ["users.read", "tweet.read", "tweet.write"],
+    "method": "DELETE",
+    "url": "/2/tweets/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the Tweet to be deleted.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "findTweetById",
+    "name": "Tweet lookup by Tweet ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/tweets/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "A single Tweet ID.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "tweetsIdLikingUsers",
+    "name": "Returns User objects that have liked the provided Tweet ID",
+    "scopes": ["users.read", "tweet.read", "like.read"],
+    "method": "GET",
+    "url": "/2/tweets/:id/liking_users",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "A single Tweet ID.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "findTweetsThatQuoteATweet",
+    "name": "Retrieve Tweets that quote a Tweet.",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/tweets/:id/quote_tweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "A single Tweet ID.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results to be returned.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "exclude",
+        "role": "query",
+        "description": "The set of entities to exclude (e.g. 'replies' or 'retweets').",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["replies", "retweets"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "tweetsIdRetweetingUsers",
+    "name": "Returns User objects that have retweeted the provided Tweet ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/tweets/:id/retweeted_by",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "A single Tweet ID.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "hideReplyById",
+    "name": "Hide replies",
+    "scopes": ["users.read", "tweet.read", "tweet.moderate.write"],
+    "method": "PUT",
+    "url": "/2/tweets/:tweet_id/hidden",
+    "params": [
+      {
+        "name": "tweet_id",
+        "role": "path",
+        "description": "The ID of the reply that you want to hide or unhide.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "hidden",
+        "role": "body",
+        "description": "Indicates the action to perform. Specify true to hide the Tweet, false to unhide. Trying to hide a Tweet that's already hidden (or unhide a Tweet that is not hidden) will result in a successful call.",
+        "type": "boolean",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "findUsersById",
+    "name": "User lookup by IDs",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users",
+    "params": [
+      {
+        "name": "ids",
+        "role": "query",
+        "description": "A list of User IDs, comma-separated. You can specify up to 100 IDs.",
+        "type": "array",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "findUsersByUsername",
+    "name": "User lookup by usernames",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/by",
+    "params": [
+      {
+        "name": "usernames",
+        "role": "query",
+        "description": "A list of usernames, comma-separated.",
+        "type": "array",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "findUserByUsername",
+    "name": "User lookup by username",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/by/username/:username",
+    "params": [
+      {
+        "name": "username",
+        "role": "path",
+        "description": "A username.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "findMyUser",
+    "name": "User lookup me",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/me",
+    "params": [
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "findUserById",
+    "name": "User lookup by ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/:id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdBlocking",
+    "name": "Returns User objects that are blocked by provided User ID",
+    "scopes": ["tweet.read", "users.read", "block.read"],
+    "method": "GET",
+    "url": "/2/users/:id/blocking",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to return results.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdBlock",
+    "name": "Block User by User ID",
+    "scopes": ["tweet.read", "users.read", "block.write"],
+    "method": "POST",
+    "url": "/2/users/:id/blocking",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to block the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "body",
+        "description": "The user ID of the user that you would like the id to block. The body should contain a string of the user ID inside of a JSON object.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "getUsersIdBookmarks",
+    "name": "Bookmarks by User",
+    "scopes": ["tweet.read", "users.read", "bookmark.read"],
+    "method": "GET",
+    "url": "/2/users/:id/bookmarks",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to return results.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/bookmarks"
+  },
+  {
+    "id": "postUsersIdBookmarks",
+    "name": "Add Tweet to Bookmarks",
+    "scopes": ["tweet.read", "users.read", "bookmark.write"],
+    "method": "POST",
+    "url": "/2/users/:id/bookmarks",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to add bookmarks.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet_id",
+        "role": "body",
+        "description": "The ID of the Tweet that you would like an id to Bookmark.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/bookmarks"
+  },
+  {
+    "id": "usersIdBookmarksDelete",
+    "name": "Remove a bookmarked Tweet",
+    "scopes": ["tweet.read", "users.read", "bookmark.write"],
+    "method": "DELETE",
+    "url": "/2/users/:id/bookmarks/:tweet_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User whose bookmark is to be removed.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet_id",
+        "role": "path",
+        "description": "The ID of the Tweet that the source User is removing from bookmarks.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/bookmarks"
+  },
+  {
+    "id": "userFollowedLists",
+    "name": "Get User's Followed Lists",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/users/:id/followed_lists",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "list.fields",
+        "role": "query",
+        "description": "A comma separated list of List fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "follower_count",
+          "id",
+          "member_count",
+          "name",
+          "owner_id",
+          "private"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["owner_id"]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listUserFollow",
+    "name": "Follow a List",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "POST",
+    "url": "/2/users/:id/followed_lists",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that will follow the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "role": "body",
+        "description": "The ID of the List that you would like the user id to follow.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listUserUnfollow",
+    "name": "Unfollow a List",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "DELETE",
+    "url": "/2/users/:id/followed_lists/:list_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that will unfollow the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "role": "path",
+        "description": "The ID of the List to unfollow.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "usersIdFollowers",
+    "name": "Returns User objects that follow a List by the provided User ID",
+    "scopes": ["users.read", "tweet.read", "follows.read"],
+    "method": "GET",
+    "url": "/2/users/:id/followers",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdFollowing",
+    "name": "Following by User ID",
+    "scopes": ["users.read", "tweet.read", "follows.read"],
+    "method": "GET",
+    "url": "/2/users/:id/following",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdFollow",
+    "name": "Follow User",
+    "scopes": ["users.read", "tweet.read", "follows.write"],
+    "method": "POST",
+    "url": "/2/users/:id/following",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to follow the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "body",
+        "description": "The user ID of the user that you would like the id to follow.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdLikedTweets",
+    "name": "Returns Tweet objects liked by the provided User ID",
+    "scopes": ["users.read", "tweet.read", "like.read"],
+    "method": "GET",
+    "url": "/2/users/:id/liked_tweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdLike",
+    "name": "Causes the User (in the path) to like the specified Tweet",
+    "scopes": ["users.read", "tweet.read", "like.write"],
+    "method": "POST",
+    "url": "/2/users/:id/likes",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to like the Tweet.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet_id",
+        "role": "body",
+        "description": "The ID of the Tweet that you would like the user id to Like.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdUnlike",
+    "name": "Causes the User (in the path) to unlike the specified Tweet",
+    "scopes": ["users.read", "tweet.read", "like.write"],
+    "method": "DELETE",
+    "url": "/2/users/:id/likes/:tweet_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to unlike the Tweet.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet_id",
+        "role": "path",
+        "description": "The ID of the Tweet that the User is requesting to unlike.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "getUserListMemberships",
+    "name": "Get a User's List Memberships",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/users/:id/list_memberships",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "list.fields",
+        "role": "query",
+        "description": "A comma separated list of List fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "follower_count",
+          "id",
+          "member_count",
+          "name",
+          "owner_id",
+          "private"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["owner_id"]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "usersIdMentions",
+    "name": "User mention timeline by User ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/:id/mentions",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "since_id",
+        "role": "query",
+        "description": "The minimum Tweet ID to be included in the result set. This parameter takes precedence over start_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "until_id",
+        "role": "query",
+        "description": "The maximum Tweet ID to be included in the result set. This parameter takes precedence over end_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "start_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The earliest UTC timestamp from which the Tweets will be provided. The since_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "end_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets will be provided. The until_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdMuting",
+    "name": "Returns User objects that are muted by the provided User ID",
+    "scopes": ["tweet.read", "users.read", "mute.read"],
+    "method": "GET",
+    "url": "/2/users/:id/muting",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to return results.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["pinned_tweet_id"]
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdMute",
+    "name": "Mute User by User ID.",
+    "scopes": ["tweet.read", "users.read", "mute.write"],
+    "method": "POST",
+    "url": "/2/users/:id/muting",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to mute the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "body",
+        "description": "The user ID of the user that you would like the id to mute. The body should contain a string of the user ID inside of a JSON object.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "listUserOwnedLists",
+    "name": "Get a User's Owned Lists.",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/users/:id/owned_lists",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get a specified 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "list.fields",
+        "role": "query",
+        "description": "A comma separated list of List fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "follower_count",
+          "id",
+          "member_count",
+          "name",
+          "owner_id",
+          "private"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["owner_id"]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listUserPinnedLists",
+    "name": "Get a User's Pinned Lists",
+    "scopes": ["users.read", "tweet.read", "list.read"],
+    "method": "GET",
+    "url": "/2/users/:id/pinned_lists",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to return results.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list.fields",
+        "role": "query",
+        "description": "A comma separated list of List fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "follower_count",
+          "id",
+          "member_count",
+          "name",
+          "owner_id",
+          "private"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["owner_id"]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listUserPin",
+    "name": "Pin a List",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "POST",
+    "url": "/2/users/:id/pinned_lists",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that will pin the List.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "role": "body",
+        "description": "The ID of the List that you would like the user id to pin.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "listUserUnpin",
+    "name": "Unpin a List",
+    "scopes": ["users.read", "tweet.read", "list.write"],
+    "method": "DELETE",
+    "url": "/2/users/:id/pinned_lists/:list_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User for whom to return results.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "role": "path",
+        "description": "The ID of the List to unpin.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/lists"
+  },
+  {
+    "id": "usersIdRetweets",
+    "name": "Causes the User (in the path) to retweet the specified Tweet.",
+    "scopes": ["users.read", "tweet.read", "tweet.write"],
+    "method": "POST",
+    "url": "/2/users/:id/retweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to retweet the Tweet.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "tweet_id",
+        "role": "body",
+        "description": "The ID of the Tweet that you would like the user id to Retweet.",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdUnretweets",
+    "name": "Causes the User (in the path) to unretweet the specified Tweet",
+    "scopes": ["users.read", "tweet.read", "tweet.write"],
+    "method": "DELETE",
+    "url": "/2/users/:id/retweets/:source_tweet_id",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to retweet the Tweet.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "source_tweet_id",
+        "role": "path",
+        "description": "The ID of the Tweet that the User is requesting to unretweet.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdTimeline",
+    "name": "User home timeline by User ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/:id/timelines/reverse_chronological",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the authenticated source User to list Reverse Chronological Timeline Tweets of.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "since_id",
+        "role": "query",
+        "description": "The minimum Tweet ID to be included in the result set. This parameter takes precedence over start_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "until_id",
+        "role": "query",
+        "description": "The maximum Tweet ID to be included in the result set. This parameter takes precedence over end_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "exclude",
+        "role": "query",
+        "description": "The set of entities to exclude (e.g. 'replies' or 'retweets').",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["replies", "retweets"]
+      },
+      {
+        "name": "start_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The earliest UTC timestamp from which the Tweets will be provided. The since_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "end_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets will be provided. The until_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdTweets",
+    "name": "User Tweets timeline by User ID",
+    "scopes": ["tweet.read", "users.read"],
+    "method": "GET",
+    "url": "/2/users/:id/tweets",
+    "params": [
+      {
+        "name": "id",
+        "role": "path",
+        "description": "The ID of the User to lookup.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "since_id",
+        "role": "query",
+        "description": "The minimum Tweet ID to be included in the result set. This parameter takes precedence over start_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "until_id",
+        "role": "query",
+        "description": "The maximum Tweet ID to be included in the result set. This parameter takes precedence over end_time if both are specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "max_results",
+        "role": "query",
+        "description": "The maximum number of results.",
+        "type": "integer",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "pagination_token",
+        "role": "query",
+        "description": "This parameter is used to get the next 'page' of results.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "exclude",
+        "role": "query",
+        "description": "The set of entities to exclude (e.g. 'replies' or 'retweets').",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": ["replies", "retweets"]
+      },
+      {
+        "name": "start_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The earliest UTC timestamp from which the Tweets will be provided. The since_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "end_time",
+        "role": "query",
+        "description": "YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets will be provided. The until_id parameter takes precedence if it is also specified.",
+        "type": "string",
+        "radio": false,
+        "required": false
+      },
+      {
+        "name": "tweet.fields",
+        "role": "query",
+        "description": "A comma separated list of Tweet fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments",
+          "author_id",
+          "context_annotations",
+          "conversation_id",
+          "created_at",
+          "entities",
+          "geo",
+          "id",
+          "in_reply_to_user_id",
+          "lang",
+          "non_public_metrics",
+          "organic_metrics",
+          "possibly_sensitive",
+          "promoted_metrics",
+          "public_metrics",
+          "referenced_tweets",
+          "reply_settings",
+          "source",
+          "text",
+          "withheld"
+        ]
+      },
+      {
+        "name": "expansions",
+        "role": "query",
+        "description": "A comma separated list of fields to expand.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "attachments.media_keys",
+          "attachments.poll_ids",
+          "author_id",
+          "entities.mentions.username",
+          "geo.place_id",
+          "in_reply_to_user_id",
+          "referenced_tweets.id",
+          "referenced_tweets.id.author_id"
+        ]
+      },
+      {
+        "name": "media.fields",
+        "role": "query",
+        "description": "A comma separated list of Media fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "alt_text",
+          "duration_ms",
+          "height",
+          "media_key",
+          "non_public_metrics",
+          "organic_metrics",
+          "preview_image_url",
+          "promoted_metrics",
+          "public_metrics",
+          "type",
+          "url",
+          "variants",
+          "width"
+        ]
+      },
+      {
+        "name": "poll.fields",
+        "role": "query",
+        "description": "A comma separated list of Poll fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "duration_minutes",
+          "end_datetime",
+          "id",
+          "options",
+          "voting_status"
+        ]
+      },
+      {
+        "name": "user.fields",
+        "role": "query",
+        "description": "A comma separated list of User fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "created_at",
+          "description",
+          "entities",
+          "id",
+          "location",
+          "name",
+          "pinned_tweet_id",
+          "profile_image_url",
+          "protected",
+          "public_metrics",
+          "url",
+          "username",
+          "verified",
+          "withheld"
+        ]
+      },
+      {
+        "name": "place.fields",
+        "role": "query",
+        "description": "A comma separated list of Place fields to display.",
+        "type": "array",
+        "radio": false,
+        "required": false,
+        "allowedValues": [
+          "contained_within",
+          "country",
+          "country_code",
+          "full_name",
+          "geo",
+          "id",
+          "name",
+          "place_type"
+        ]
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/tweets/lookup"
+  },
+  {
+    "id": "usersIdUnblock",
+    "name": "Unblock User by User ID",
+    "scopes": ["tweet.read", "users.read", "block.write"],
+    "method": "DELETE",
+    "url": "/2/users/:source_user_id/blocking/:target_user_id",
+    "params": [
+      {
+        "name": "source_user_id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to unblock the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "path",
+        "description": "The ID of the User that the source User is requesting to unblock.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdUnfollow",
+    "name": "Unfollow User",
+    "scopes": ["users.read", "tweet.read", "follows.write"],
+    "method": "DELETE",
+    "url": "/2/users/:source_user_id/following/:target_user_id",
+    "params": [
+      {
+        "name": "source_user_id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to unfollow the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "path",
+        "description": "The ID of the User that the source User is requesting to unfollow.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  },
+  {
+    "id": "usersIdUnmute",
+    "name": "Unmute User by User ID",
+    "scopes": ["tweet.read", "users.read", "mute.write"],
+    "method": "DELETE",
+    "url": "/2/users/:source_user_id/muting/:target_user_id",
+    "params": [
+      {
+        "name": "source_user_id",
+        "role": "path",
+        "description": "The ID of the authenticated source User that is requesting to unmute the target User.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      },
+      {
+        "name": "target_user_id",
+        "role": "path",
+        "description": "The ID of the User that the source User is requesting to unmute.",
+        "type": "string",
+        "radio": false,
+        "required": true
+      }
+    ],
+    "docsUrl": "https://developer.twitter.com/en/docs/twitter-api/users/lookup"
+  }
+]
