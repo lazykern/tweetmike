@@ -6,7 +6,6 @@ import StyledReactJson from '@components/StyledReactJson';
 import {
     defaultTwitterApiVersion,
     requestMethods,
-    url,
     twitterApiBaseUrl,
     twitterApiVersions,
 } from 'config';
@@ -214,6 +213,12 @@ export default function Home({
     newRequestPathParams?: object;
     newRequestQuery?: object;
   }) => {
+    if (newEndpoint !== currentEndpoint) {
+      setRequestPathParams({});
+      setRequestQuery({});
+    }
+
+
     let path = (newEndpoint || currentEndpoint!).url;
     for (const [key, value] of Object.entries(
       newRequestPathParams || requestPathParams
