@@ -1,4 +1,4 @@
-import {EndpointInterface, EndpointParamInterface} from 'interfaces';
+import { EndpointInterface, EndpointParamInterface } from 'interfaces';
 
 import {
   server,
@@ -34,14 +34,13 @@ import {
   Typography,
 } from '@mui/material';
 
-import React, {useRef, useState} from 'react';
-import {clearObjectFaulty} from 'utils';
-import {maxWidth} from '@mui/system';
+import React, { useRef, useState } from 'react';
+import { clearObjectFaulty } from 'utils';
 
 export default function Home({
   endpoints,
 }: {
-  endpoints: {'1.1': []; '2': EndpointInterface[]};
+  endpoints: { '1.1': []; '2': EndpointInterface[] };
 }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<object>({});
@@ -179,7 +178,7 @@ export default function Home({
   };
 
   const updateRequestPathParams = (pathParam: string, value: string) => {
-    const newRequestPathParams = {...requestPathParams, [pathParam]: value};
+    const newRequestPathParams = { ...requestPathParams, [pathParam]: value };
     setRequestPathParams(newRequestPathParams);
     updateRequestUrl({
       newRequestPathParams: newRequestPathParams,
@@ -187,22 +186,22 @@ export default function Home({
   };
 
   const updateRequestQuery = (queryParam: string, value: any) => {
-    let newRequestQuery = {...requestQuery, [queryParam]: value};
+    let newRequestQuery = { ...requestQuery, [queryParam]: value };
     newRequestQuery = clearObjectFaulty(newRequestQuery);
     setRequestQuery(newRequestQuery);
-    updateRequestUrl({newRequestQuery: newRequestQuery});
+    updateRequestUrl({ newRequestQuery: newRequestQuery });
   };
 
   const updateRequestBody = (property: string, value: any) => {
-    let newRequestBody: {[key: string]: any} = {};
+    let newRequestBody: { [key: string]: any } = {};
 
     if (property.includes('.')) {
       const [parent, child] = property.split('.');
-      newRequestBody = {...requestBody};
-      newRequestBody[parent] = {...newRequestBody[parent]};
+      newRequestBody = { ...requestBody };
+      newRequestBody[parent] = { ...newRequestBody[parent] };
       newRequestBody[parent][child] = value;
     } else {
-      newRequestBody = {...requestBody, [property]: value};
+      newRequestBody = { ...requestBody, [property]: value };
     }
     newRequestBody = clearObjectFaulty(newRequestBody);
 
@@ -247,7 +246,7 @@ export default function Home({
         fontFamily={'monospace'}
         sx={{
           display: 'flex',
-          maxWidth: {sm: '45vw'},
+          maxWidth: { sm: '45vw' },
           overflowWrap: 'break-word',
           whiteSpace: 'pre-wrap',
           wordWrap: 'break-word',
@@ -505,14 +504,14 @@ export default function Home({
 
   return (
     <div>
-      <Grid container columnSpacing={1} sx={{height: '90vh'}}>
-        <Grid item xs={16} sm={6} maxWidth={{xs: '100%', sm: '60%'}}>
+      <Grid container columnSpacing={1} sx={{ height: '90vh' }}>
+        <Grid item xs={16} sm={6} maxWidth={{ xs: '100%', sm: '60%' }}>
           <Stack rowGap={1} flex="1 1 0">
             <Grid container columnSpacing={1} alignItems="center">
               <Grid item>
                 <Button
                   onClick={handleOpenApiVersionMenu}
-                  style={{borderRadius: 35}}
+                  style={{ borderRadius: 35 }}
                 >
                   /{apiVersion}/
                 </Button>
@@ -614,18 +613,18 @@ export default function Home({
                 </Box>
               </Grid>
               <Grid item flex={1}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    disabled={
-                      loading ||
-                      (apiVersion === '2' && !currentEndpoint) ||
-                      (apiVersion === '1.1' && !endpointInput)
-                    }
-                    onClick={handleSendButton}
-                  >
-                    {loading ? 'Sending...' : 'Send'}
-                  </Button>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  disabled={
+                    loading ||
+                    (apiVersion === '2' && !currentEndpoint) ||
+                    (apiVersion === '1.1' && !endpointInput)
+                  }
+                  onClick={handleSendButton}
+                >
+                  {loading ? 'Sending...' : 'Send'}
+                </Button>
               </Grid>
             </Grid>
 
@@ -644,10 +643,13 @@ export default function Home({
             )}
             {apiVersion == '2' && renderParams()}
 
-            <Divider sx={{marginTop: 2, marginBottom: 2}} />
+            <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
 
-            <Box ref={responseRef} 
-            marginTop={3} display={{xs: 'flex', sm: 'none'}}>
+            <Box
+              ref={responseRef}
+              marginTop={3}
+              display={{ xs: 'flex', sm: 'none' }}
+            >
               <StyledReactJson src={data} />
             </Box>
           </Stack>
@@ -661,10 +663,8 @@ export default function Home({
             sm: 'flex',
           }}
         >
-          <Box
-          >
-          <StyledReactJson src={data} />
-
+          <Box>
+            <StyledReactJson src={data} />
           </Box>
         </Grid>
       </Grid>
