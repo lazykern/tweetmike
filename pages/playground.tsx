@@ -1,37 +1,33 @@
 import { EndpointInterface, EndpointParamInterface } from 'interfaces';
 
-import {
-  server,
-  twitterApiVersions,
-  twitterApiBaseUrl,
-  defaultTwitterApiVersion,
-  requestMethods,
-} from 'config';
 import StyledMenu from '@components/StyledMenu';
 import StyledReactJson from '@components/StyledReactJson';
+import {
+    defaultTwitterApiVersion,
+    requestMethods,
+    server,
+    twitterApiBaseUrl,
+    twitterApiVersions,
+} from 'config';
 
 import {
-  Alert,
-  Autocomplete,
-  AutocompleteChangeDetails,
-  AutocompleteChangeReason,
-  AutocompleteInputChangeReason,
-  Box,
-  Button,
-  Checkbox,
-  Collapse,
-  Divider,
-  FormControl,
-  Grid,
-  ListItemText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Snackbar,
-  Stack,
-  TextField,
-  Tooltip,
-  Typography,
+    Alert,
+    Autocomplete,
+    AutocompleteChangeDetails,
+    AutocompleteChangeReason,
+    Box,
+    Button,
+    Checkbox,
+    Divider,
+    FormControl,
+    Grid,
+    ListItemText,
+    MenuItem,
+    Select,
+    Snackbar,
+    Stack,
+    TextField,
+    Typography,
 } from '@mui/material';
 
 import React, { useRef, useState } from 'react';
@@ -224,7 +220,7 @@ export default function Home({
       path = path.replace(`:${key}`, value ? value : `:${key}`);
     }
 
-    let url = new URL(twitterApiBaseUrl + path);
+    const url = new URL(twitterApiBaseUrl + path);
     for (const [key, value] of Object.entries(
       newRequestQuery || requestQuery
     )) {
@@ -356,15 +352,18 @@ export default function Home({
               />
             )}
             onChange={(
-              event: React.ChangeEvent<{}>,
-              value: string | string[]
+              event: React.SyntheticEvent<Element, Event>,
+              value: string | string[],
+              reason: AutocompleteChangeReason,
+              details?: AutocompleteChangeDetails<string> | undefined
             ) => {
               if (param.role === 'query') {
                 updateRequestQuery(param.name, value);
               } else {
                 updateRequestBody(param.name, value);
               }
-            }}
+            }
+            }
           />
         );
       } else {
@@ -388,8 +387,10 @@ export default function Home({
               />
             )}
             onChange={(
-              event: React.ChangeEvent<{}>,
-              value: string | string[]
+              event: React.SyntheticEvent<Element, Event>,
+              value: string | string[],
+              reason: AutocompleteChangeReason,
+              details?: AutocompleteChangeDetails<string> | undefined
             ) => {
               if (param.role === 'query') {
                 updateRequestQuery(param.name, value);
@@ -682,12 +683,15 @@ export default function Home({
 }
 
 export async function getStaticProps(context: any) {
-  const apiV2Endpoints = await fetch(`${server}/api/2/endpoints`);
+  const apiV2Endpoints = await fetch(`${process.env.URL}/api/2/endpoints`).then(res =>
+    res.json()
+  );
+  console.log(apiV2Endpoints);
   return {
     props: {
       endpoints: {
         '1.1': [],
-        '2': await apiV2Endpoints.json(),
+        '2': apiV2Endpoints,
       },
     },
   };

@@ -36,8 +36,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const client = userClient.v2;
 
-  let query = req.query;
-  let body = req.body;
+  const query = req.query;
+  const body = req.body;
   const endpoint = (query.slug as string[]).join('/');
   delete query.slug;
 

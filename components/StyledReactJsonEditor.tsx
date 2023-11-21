@@ -1,3 +1,4 @@
+import React from 'react';
 import {useTheme} from 'next-themes';
 import dynamic from 'next/dynamic';
 import {OnCopyProps} from 'react-json-view';
