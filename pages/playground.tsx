@@ -5,7 +5,7 @@ import StyledReactJson from '@components/StyledReactJson';
 import {
     defaultTwitterApiVersion,
     requestMethods,
-    server,
+    url,
     twitterApiBaseUrl,
     twitterApiVersions,
 } from 'config';
@@ -683,7 +683,7 @@ export default function Home({
 }
 
 export async function getStaticProps(context: any) {
-  const apiV2Endpoints = await fetch(`${process.env.URL}/api/2/endpoints`).then(res =>
+  const apiV2Endpoints = await fetch(`${url}/api/2/endpoints`).then(res =>
     res.json()
   );
   console.log(apiV2Endpoints);
