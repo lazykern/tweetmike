@@ -1,4 +1,5 @@
 import { EndpointInterface, EndpointParamInterface } from 'interfaces';
+import apiV2Enpoints from 'public/json/2/endpoints.json'
 
 import StyledMenu from '@components/StyledMenu';
 import StyledReactJson from '@components/StyledReactJson';
@@ -683,15 +684,11 @@ export default function Home({
 }
 
 export async function getStaticProps(context: any) {
-  const apiV2Endpoints = await fetch(`${url}/api/2/endpoints`).then(res =>
-    res.json()
-  );
-  console.log(apiV2Endpoints);
   return {
     props: {
       endpoints: {
         '1.1': [],
-        '2': apiV2Endpoints,
+        '2': apiV2Enpoints,
       },
     },
   };
